@@ -1,0 +1,43 @@
+[
+  {
+    "path": "packages/anchor-contrib/dist/esm/index.js",
+    "limit": "7 KB",
+    "ignore": [
+      "@project-serum/anchor",
+      "@solana/web3.js",
+      "@saberhq/solana-contrib"
+    ],
+    "webpack": true
+  },
+  {
+    "path": "packages/solana-contrib/dist/esm/index.js",
+    "limit": "10 KB",
+    "ignore": ["@solana/web3.js", "bn.js"],
+    "webpack": true
+  },
+  {
+    "path": "packages/token-utils/dist/esm/index.js",
+    "limit": "50 KB",
+    "ignore": ["@solana/spl-token", "@solana/web3.js", "bn.js"],
+    "webpack": true
+  },
+  {
+    "path": "packages/use-solana/dist/esm/index.js",
+    "limit": "50 KB",
+    "ignore": [
+      "@solana/spl-token",
+      "@solana/web3.js",
+      "bn.js",
+      "@solana/wallet-adapter-base",
+      "@solana/wallet-adapter-coin98",
+      "@solana/wallet-adapter-clover",
+      "@solana/wallet-adapter-mathwallet",
+      "@solana/wallet-adapter-phantom",
+      "@solana/wallet-adapter-slope",
+      "@solana/wallet-adapter-solflare",
+      "@solana/wallet-adapter-sollet",
+      "@solana/wallet-adapter-solong"
+    ],
+    "webpack": true
+  }
+]

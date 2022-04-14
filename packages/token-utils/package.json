@@ -1,0 +1,43 @@
+{
+  "name": "@dahlia-labs/token-utils",
+  "description": "Token-related math and transaction utilities.",
+  "version": "0.0.0",
+  "repository": "git@github.com:DahliaLabs/dahlia-common.git",
+  "author": "Kyle Scott <kyle@dahlia.finance>",
+  "license": "Apache-2.0",
+  "keywords": [
+    "celo",
+    "dahlia",
+    "mobius",
+    "pinnata"
+  ],
+  "scripts": {
+    "build": "tsc && tsc -P tsconfig.esm.json",
+    "clean": "rm -fr dist/",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@ubeswap/token-math": "^4.4.4",
+    "tiny-invariant": "^1.2.0",
+    "tslib": "^2.3.1"
+  },
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist/",
+    "src/"
+  ],
+  "devDependencies": {
+    "@saberhq/tsconfig": "^1.12.47",
+    "@types/bn.js": "^5.1.0",
+    "jsbi": "^4.1.0"
+  },
+  "peerDependencies": {
+    "bn.js": "^4 || ^5",
+    "jsbi": "^3 || ^4"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "f9fd3fbd36a7a6dd6f5e9597af5309affe50ac0e"
+}
