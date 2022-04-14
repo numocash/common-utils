@@ -2,7 +2,7 @@
 
 Common libraries across Dahlia projects.
 
-This repository has been forked off of [Saber's saber-common repository](https://github.com/saberhq/saber-common)
+This repository has been forked off of [Saber's saber-common repository](https://github.com/saber-hq/saber-common)
 
 ## Release
 
