@@ -27,9 +27,9 @@
   "devDependencies": {
     "@types/bn.js": "^5.1.0",
     "@types/lodash.mapvalues": "^4.6.6",
-    "@types/node": "^17.0.21",
+    "@types/node": "^17.0.24",
     "bn.js": "^5.2.0",
-    "jsbi": "^4.1.0"
+    "jsbi": "^4.2.1"
   },
   "peerDependencies": {
     "bn.js": ">=5",
