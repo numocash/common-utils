@@ -1,7 +1,8 @@
-import type { Token as UToken } from '@ubeswap/token-math'
+import type { Token as UToken } from "@ubeswap/token-math";
 
-import { Alfajores, Baklava, ChainId, Mainnet, Network } from './'
-import type { TokenInfo } from './tokenList'
+import type { Network } from "./";
+import { Alfajores, Baklava, ChainId, Mainnet } from "./";
+import type { TokenInfo } from "./tokenList";
 
 /**
  * Token information.
@@ -10,64 +11,64 @@ export class Token implements UToken<Token> {
   /**
    * The network that the Token is on.
    */
-  readonly network: Network
+  readonly network: Network;
 
   constructor(readonly info: TokenInfo) {
-    this.network = chainIdToNetwork(info.chainId) ?? Mainnet
+    this.network = chainIdToNetwork(info.chainId) ?? Mainnet;
   }
 
   /**
    * The Base58 string representation of the mint address.
    */
   get address(): string {
-    return this.info.address
+    return this.info.address;
   }
 
   /**
    * The chain ID of the token.
    */
   get chainId(): number {
-    return this.info.chainId
+    return this.info.chainId;
   }
 
   /**
    * Number of decimals of the token.
    */
   get decimals(): number {
-    return this.info.decimals
+    return this.info.decimals;
   }
 
   /**
    * The name of the token.
    */
   get name(): string {
-    return this.info.name
+    return this.info.name;
   }
 
   /**
    * The symbol of the token.
    */
   get symbol(): string {
-    return this.info.symbol
+    return this.info.symbol;
   }
 
   /**
    * The token's icon to render.
    */
   get icon(): string | undefined {
-    return this.info.logoURI
+    return this.info.logoURI;
   }
 
   equals(other: Token): boolean {
-    return tokensEqual(this, other)
+    return tokensEqual(this, other);
   }
 
   toString(): string {
-    return `Token[address=${this.address}, decimals=${this.decimals}, network=${this.network}]`
+    return `Token[address=${this.address}, decimals=${this.decimals}, chainId=${this.chainId}]`;
   }
 
   toJSON(): unknown {
-    return this.info
+    return this.info;
   }
 
   /**
@@ -76,7 +77,7 @@ export class Token implements UToken<Token> {
    * @returns
    */
   hasTag(tag: string): boolean {
-    return !!this.info.tags?.includes(tag)
+    return !!this.info.tags?.includes(tag);
   }
 }
 
@@ -86,23 +87,30 @@ export class Token implements UToken<Token> {
  * @param b
  * @returns
  */
-export const tokensEqual = (a: Token | undefined, b: Token | undefined): boolean =>
-  a !== undefined && b !== undefined && a.address === b.address && a.network === b.network
+export const tokensEqual = (
+  a: Token | undefined,
+  b: Token | undefined
+): boolean =>
+  a !== undefined &&
+  b !== undefined &&
+  a.address === b.address &&
+  a.network === b.network;
 
 /**
  * Map of network to Token
  */
-export type TokenMap = { [c in ChainId]: Token }
+export type TokenMap = { [c in ChainId]: Token };
 
 export const CHAIN_ID_TO_NETWORK = {
   [ChainId.Mainnet]: Mainnet,
   [ChainId.Alfajores]: Alfajores,
   [ChainId.Baklava]: Baklava,
-}
+};
 
 /**
  * Gets the Network associated with a chain id.
  * @param network
  * @returns
  */
-export const chainIdToNetwork = (env: ChainId): Network => CHAIN_ID_TO_NETWORK[env]
+export const chainIdToNetwork = (env: ChainId): Network =>
+  CHAIN_ID_TO_NETWORK[env];
