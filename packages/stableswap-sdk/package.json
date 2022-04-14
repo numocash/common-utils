@@ -7,7 +7,7 @@
     "dahlia",
     "pinnata"
   ],
-  "version": "0.1.1",
+  "version": "0.1.2",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/DahliaLabs/dahlia-common.git"
@@ -36,7 +36,7 @@
     "jsbi": "^3 || ^4"
   },
   "dependencies": {
-    "@dahlia-labs/token-utils": "^0.1.1",
+    "@dahlia-labs/token-utils": "^0.1.2",
     "@saberhq/tsconfig": "^1.12.59",
     "lodash.mapvalues": "^4.6.0",
     "tslib": "^2.3.1"
