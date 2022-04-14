@@ -1,6 +1,6 @@
-import type { IExchangeInfo } from 'constants/pools'
+import type { IExchangeInfo } from '../entities'
 import JSBI from 'jsbi'
-import { Price, TEN, TokenAmount } from 'lib/token-utils'
+import { Price, TEN, TokenAmount } from '@dahlia-labs/token-utils'
 
 import { calculateEstimatedSwapOutputAmount } from './'
 

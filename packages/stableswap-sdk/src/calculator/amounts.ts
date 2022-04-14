@@ -1,7 +1,8 @@
-import type { Fees, IExchangeInfo } from 'constants/pools'
+
 import JSBI from 'jsbi'
-import type { Token } from 'lib/token-utils'
-import { Fraction, ONE, TokenAmount, ZERO } from 'lib/token-utils'
+import type { Token } from '@dahlia-labs/token-utils'
+import { Fraction, ONE, TokenAmount, ZERO } from '@dahlia-labs/token-utils'
+import { Fees, IExchangeInfo } from '../entities'
 import mapValues from 'lodash.mapvalues'
 
 import { computeD, computeY } from './curve'

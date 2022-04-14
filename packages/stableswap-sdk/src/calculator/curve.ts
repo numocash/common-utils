@@ -1,5 +1,5 @@
 import JSBI from 'jsbi'
-import { ONE, ZERO } from 'lib/token-utils'
+import { ONE, ZERO } from '@dahlia-labs/token-utils'
 
 const N_COINS = JSBI.BigInt(2) // n
 

@@ -33,7 +33,8 @@
     "jsbi": "^3 || ^4"
   },
   "dependencies": {
-    "@dahlia-labs/token-utils": "workspace:^",
+    "@dahlia-labs/token-utils": "0.0.0",
+    "@saberhq/tsconfig": "^1.12.59",
     "lodash.mapvalues": "^4.6.0",
     "tslib": "^2.3.1"
   },
