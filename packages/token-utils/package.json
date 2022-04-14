@@ -47,5 +47,8 @@
     "url": "https://github.com/DahliaLabs/dahlia-common/issues"
   },
   "homepage": "https://github.com/DahliaLabs/dahlia-common#readme",
-  "gitHead": "2accf7aa390fa87578fdac5df9efe1453f948e5e"
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  }
 }

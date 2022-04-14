@@ -1,9 +1,11 @@
-# @saberhq/stableswap-sdk
+# `stableswap-sdk`
 
-Stableswap SDK.
+> TODO: description
 
-## Installation
+## Usage
 
 ```
-yarn add @saberhq/stableswap-sdk
+const stableswapSdk = require('stableswap-sdk');
+
+// TODO: DEMONSTRATE API
 ```
