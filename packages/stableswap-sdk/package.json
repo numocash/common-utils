@@ -8,7 +8,10 @@
     "pinnata"
   ],
   "version": "0.0.0",
-  "repository": "git@github.com:DahliaLabs/dahlia-common.git",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/DahliaLabs/dahlia-common.git"
+  },
   "author": "Kyle Scott <kyle@dahlia.finance>",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -44,5 +47,10 @@
   ],
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "types": "./dist/cjs/index.d.ts",
+  "bugs": {
+    "url": "https://github.com/DahliaLabs/dahlia-common/issues"
+  },
+  "homepage": "https://github.com/DahliaLabs/dahlia-common#readme"
 }
