@@ -1966,6 +1966,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@dahlia-labs/celo-tokens@workspace:packages/celo-tokens":
+  version: 0.0.0-use.local
+  resolution: "@dahlia-labs/celo-tokens@workspace:packages/celo-tokens"
+  dependencies:
+    "@dahlia-labs/token-utils": 0.1.0
+    "@saberhq/tsconfig": ^1.12.59
+    "@types/bn.js": ^5.1.0
+    "@types/lodash.mapvalues": ^4.6.6
+    "@ubeswap/token-math": ^4.4.6
+    jsbi: ^4.2.1
+    lodash.mapvalues: ^4.6.0
+    tiny-invariant: ^1.2.0
+    tslib: ^2.3.1
+  peerDependencies:
+    bn.js: ^4 || ^5
+    jsbi: ^3 || ^4
+  languageName: unknown
+  linkType: soft
+
 "@dahlia-labs/dahlia-common@workspace:.":
   version: 0.0.0-use.local
   resolution: "@dahlia-labs/dahlia-common@workspace:."
@@ -2025,7 +2044,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@dahlia-labs/token-utils@^0.1.0, @dahlia-labs/token-utils@workspace:packages/token-utils":
+"@dahlia-labs/token-utils@0.1.0, @dahlia-labs/token-utils@^0.1.0, @dahlia-labs/token-utils@workspace:packages/token-utils":
   version: 0.0.0-use.local
   resolution: "@dahlia-labs/token-utils@workspace:packages/token-utils"
   dependencies:
