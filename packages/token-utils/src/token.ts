@@ -1,4 +1,5 @@
-import type { Network } from "@dahlia-labs/celo-contrib";
+import type { ChainId, Network } from "@dahlia-labs/celo-contrib";
+import { chainIdToNetwork, Mainnet } from "@dahlia-labs/celo-contrib";
 import type { Token as UToken } from "@ubeswap/token-math";
 
 import type { TokenInfo } from "./tokenList";
@@ -99,17 +100,3 @@ export const tokensEqual = (
  * Map of network to Token
  */
 export type TokenMap = { [c in ChainId]: Token };
-
-export const CHAIN_ID_TO_NETWORK = {
-  [ChainId.Mainnet]: Mainnet,
-  [ChainId.Alfajores]: Alfajores,
-  [ChainId.Baklava]: Baklava,
-};
-
-/**
- * Gets the Network associated with a chain id.
- * @param network
- * @returns
- */
-export const chainIdToNetwork = (env: ChainId): Network =>
-  CHAIN_ID_TO_NETWORK[env];
