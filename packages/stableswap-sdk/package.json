@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@dahlia-labs/token-utils": "^0.2.1",
-    "@saberhq/tsconfig": "^1.12.59",
+    "@saberhq/tsconfig": "^1.12.60",
     "lodash.mapvalues": "^4.6.0",
     "tslib": "^2.3.1"
   },
