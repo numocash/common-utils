@@ -1,7 +1,6 @@
+import type { Network } from "@dahlia-labs/celo-contrib";
 import type { Token as UToken } from "@ubeswap/token-math";
 
-import type { Network } from "./";
-import { Alfajores, Baklava, ChainId, Mainnet } from "./";
 import type { TokenInfo } from "./tokenList";
 
 /**

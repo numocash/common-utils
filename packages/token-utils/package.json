@@ -20,6 +20,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
+    "@dahlia-labs/celo-contrib": "0.3.0",
     "@ubeswap/token-math": "^4.4.6",
     "tiny-invariant": "^1.2.0",
     "tslib": "^2.3.1"
@@ -46,9 +47,5 @@
   "bugs": {
     "url": "https://github.com/DahliaLabs/dahlia-common/issues"
   },
-  "homepage": "https://github.com/DahliaLabs/dahlia-common#readme",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  }
+  "homepage": "https://github.com/DahliaLabs/dahlia-common#readme"
 }

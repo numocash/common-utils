@@ -1,6 +1,6 @@
 {
   "name": "@dahlia-labs/celo-contrib",
-  "description": "Dahlia Labs Celo packages.",
+  "description": "Dahlia Labs Celo helpers.",
   "version": "0.3.0",
   "repository": {
     "type": "git",
@@ -38,9 +38,5 @@
   "bugs": {
     "url": "https://github.com/DahliaLabs/dahlia-common/issues"
   },
-  "homepage": "https://github.com/DahliaLabs/dahlia-common#readme",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  }
+  "homepage": "https://github.com/DahliaLabs/dahlia-common#readme"
 }
