@@ -2145,7 +2145,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@dahlia-labs/stableswap-sdk@workspace:packages/stableswap-sdk"
   dependencies:
-    "@dahlia-labs/token-utils": ^0.2.0
+    "@dahlia-labs/token-utils": ^0.2.1
     "@saberhq/tsconfig": ^1.12.60
     "@types/bn.js": ^5.1.0
     "@types/lodash.mapvalues": ^4.6.6
@@ -2160,7 +2160,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@dahlia-labs/token-utils@^0.2.0, @dahlia-labs/token-utils@workspace:packages/token-utils":
+"@dahlia-labs/token-utils@^0.2.1, @dahlia-labs/token-utils@workspace:packages/token-utils":
   version: 0.0.0-use.local
   resolution: "@dahlia-labs/token-utils@workspace:packages/token-utils"
   dependencies:
