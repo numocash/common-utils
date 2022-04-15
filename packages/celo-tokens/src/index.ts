@@ -1,4 +1,5 @@
-import { ChainId, Token } from "@dahlia-labs/token-utils";
+import { ChainId } from "@dahlia-labs/celo-contrib";
+import { Token } from "@dahlia-labs/token-utils";
 import mapValues from "lodash.mapvalues";
 
 const imageRegistry =
