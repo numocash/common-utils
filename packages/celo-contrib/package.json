@@ -1,7 +1,7 @@
 {
   "name": "@dahlia-labs/celo-contrib",
   "description": "Dahlia Labs Celo packages.",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/DahliaLabs/dahlia-common.git"
