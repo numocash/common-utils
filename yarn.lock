@@ -2160,7 +2160,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@dahlia-labs/token-utils@^0.2.1, @dahlia-labs/token-utils@workspace:packages/token-utils":
+"@dahlia-labs/token-utils@0.2.1, @dahlia-labs/token-utils@^0.2.1, @dahlia-labs/token-utils@workspace:packages/token-utils":
   version: 0.0.0-use.local
   resolution: "@dahlia-labs/token-utils@workspace:packages/token-utils"
   dependencies:
@@ -2175,20 +2175,6 @@ __metadata:
     jsbi: ^3 || ^4
   languageName: unknown
   linkType: soft
-
-"@dahlia-labs/token-utils@npm:0.2.1":
-  version: 0.2.1
-  resolution: "@dahlia-labs/token-utils@npm:0.2.1"
-  dependencies:
-    "@ubeswap/token-math": ^4.4.6
-    tiny-invariant: ^1.2.0
-    tslib: ^2.3.1
-  peerDependencies:
-    bn.js: ^4 || ^5
-    jsbi: ^3 || ^4
-  checksum: 8b5ec084f4252d5826c4891e190dede77960a5856047f833a8ba62f50c3d4d3e11711e10392036edef99bddc65a0b453afde72e4df74c1249bc8f20d4239a251
-  languageName: node
-  linkType: hard
 
 "@eslint/eslintrc@npm:^1.2.1":
   version: 1.2.1
