@@ -1,0 +1,46 @@
+{
+  "name": "@dahlia-labs/celo-contrib",
+  "description": "Dahlia Labs Celo packages.",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/DahliaLabs/dahlia-common.git"
+  },
+  "author": "Kyle Scott <kyle@dahlia.finance>",
+  "license": "Apache-2.0",
+  "keywords": [
+    "celo",
+    "dahlia",
+    "mobius",
+    "pinnata"
+  ],
+  "scripts": {
+    "build": "tsc && tsc -P tsconfig.esm.json",
+    "clean": "rm -fr dist/",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "tslib": "^2.3.1"
+  },
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist/",
+    "src/"
+  ],
+  "devDependencies": {
+    "@saberhq/tsconfig": "^1.12.59"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "types": "./dist/cjs/index.d.ts",
+  "bugs": {
+    "url": "https://github.com/DahliaLabs/dahlia-common/issues"
+  },
+  "homepage": "https://github.com/DahliaLabs/dahlia-common#readme",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  }
+}
