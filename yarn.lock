@@ -2088,7 +2088,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@dahlia-labs/celo-tokens@workspace:packages/celo-tokens"
   dependencies:
-    "@dahlia-labs/token-utils": ^0.3.0
+    "@dahlia-labs/celo-contrib": 0.3.0
+    "@dahlia-labs/token-utils": 0.3.0
     "@saberhq/tsconfig": ^1.12.60
     "@types/bn.js": ^5.1.0
     "@types/lodash.mapvalues": ^4.6.6
@@ -2160,7 +2161,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@dahlia-labs/token-utils@^0.3.0, @dahlia-labs/token-utils@workspace:packages/token-utils":
+"@dahlia-labs/token-utils@0.3.0, @dahlia-labs/token-utils@^0.3.0, @dahlia-labs/token-utils@workspace:packages/token-utils":
   version: 0.0.0-use.local
   resolution: "@dahlia-labs/token-utils@workspace:packages/token-utils"
   dependencies:

@@ -20,8 +20,8 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@dahlia-labs/celo-contrib": "workspace:^",
-    "@dahlia-labs/token-utils": "^0.3.0",
+    "@dahlia-labs/celo-contrib": "0.3.0",
+    "@dahlia-labs/token-utils": "0.3.0",
     "@ubeswap/token-math": "^4.4.6",
     "lodash.mapvalues": "^4.6.0",
     "tiny-invariant": "^1.2.0",
