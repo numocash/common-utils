@@ -1,5 +1,8 @@
-import type { BigintIsh, NumberFormat, Percent } from "@ubeswap/token-math";
-import { TokenAmount as UTokenAmount } from "@ubeswap/token-math";
+import type { BigintIsh, NumberFormat } from "@ubeswap/token-math";
+import {
+  parseAmountFromString,
+  TokenAmount as UTokenAmount,
+} from "@ubeswap/token-math";
 
 import type { Token } from "./token";
 
@@ -20,6 +23,11 @@ export class TokenAmount extends UTokenAmount<Token> {
     super(token, amount);
   }
 
+  new(token: Token, amount: BigintIsh): this {
+    // unsafe but nobody will be extending this anyway probably
+    return new TokenAmount(token, amount) as this;
+  }
+
   /**
    * Parses a token amount from a decimal representation.
    * @param token
@@ -27,25 +35,8 @@ export class TokenAmount extends UTokenAmount<Token> {
    * @returns
    */
   static parse(token: Token, uiAmount: string): TokenAmount {
-    const prev = UTokenAmount.parseFromString(token, uiAmount);
-    return new TokenAmount(token, prev.raw);
-  }
-
-  override add(other: TokenAmount): TokenAmount {
-    const result = super.add(other);
-    return new TokenAmount(this.token, result.raw);
-  }
-  override subtract(other: TokenAmount): TokenAmount {
-    const result = super.subtract(other);
-    return new TokenAmount(this.token, result.raw);
-  }
-  override multiplyBy(percent: Percent): TokenAmount {
-    const result = super.multiplyBy(percent);
-    return new TokenAmount(this.token, result.raw);
-  }
-  override reduceBy(percent: Percent): TokenAmount {
-    const result = super.reduceBy(percent);
-    return new TokenAmount(this.token, result.raw);
+    const prev = parseAmountFromString(token, uiAmount);
+    return new TokenAmount(token, prev);
   }
 
   /**
