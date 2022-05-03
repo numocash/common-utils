@@ -1,5 +1,8 @@
-import { BigintIsh, NumberFormat, parseAmountFromString } from "@ubeswap/token-math";
-import { TokenAmount as UTokenAmount } from "@ubeswap/token-math";
+import type { BigintIsh, NumberFormat } from "@ubeswap/token-math";
+import {
+  parseAmountFromString,
+  TokenAmount as UTokenAmount,
+} from "@ubeswap/token-math";
 
 import type { Token } from "./token";
 
@@ -25,17 +28,16 @@ export class TokenAmount extends UTokenAmount<Token> {
     return new TokenAmount(token, amount) as this;
   }
 
-   /**
+  /**
    * Parses a token amount from a decimal representation.
    * @param token
    * @param uiAmount
    * @returns
    */
-    static parse(token: Token, uiAmount: string): TokenAmount {
-      const prev = parseAmountFromString(token, uiAmount);
-      return new TokenAmount(token, prev);
-    }
-
+  static parse(token: Token, uiAmount: string): TokenAmount {
+    const prev = parseAmountFromString(token, uiAmount);
+    return new TokenAmount(token, prev);
+  }
 
   /**
    * Formats the token amount with units and decimal adjustment, e.g. "100.42 SOL"
