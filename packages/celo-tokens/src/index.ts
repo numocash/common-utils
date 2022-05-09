@@ -145,3 +145,14 @@ export const dUBE = makeTokens(
   "dUBE",
   "Dahlia Ube"
 );
+
+export const UST = makeTokens(
+  {
+    [ChainId.Mainnet]: "0xEd193C4E69F591E42398eF54DEa65aa1bb02835c",
+    [ChainId.Alfajores]: "0xEd193C4E69F591E42398eF54DEa65aa1bb02835c",
+    [ChainId.Baklava]: "0xEd193C4E69F591E42398eF54DEa65aa1bb02835c",
+  },
+  18,
+  "UST",
+  "Allbridge UST"
+);
