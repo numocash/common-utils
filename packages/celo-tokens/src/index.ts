@@ -1,4 +1,5 @@
 import { ChainId } from "@dahlia-labs/celo-contrib";
+import type { TokenExtensions } from "@dahlia-labs/token-utils";
 import { Token } from "@dahlia-labs/token-utils";
 import mapValues from "lodash.mapvalues";
 
@@ -10,7 +11,8 @@ export const makeTokens = (
   decimals: number,
   symbol: string,
   name: string,
-  logoURI?: string
+  logoURI?: string,
+  extensions?: TokenExtensions
 ): { [net in ChainId]: Token } => {
   return mapValues(addresses, (tokenAddress, network) => {
     return new Token({
@@ -21,6 +23,7 @@ export const makeTokens = (
       name,
       logoURI:
         logoURI ?? imageRegistry.concat(symbol.toLowerCase()).concat(".svg"),
+      extensions,
     });
   });
 };
@@ -33,7 +36,9 @@ export const MOBI = makeTokens(
   },
   18,
   "MOBI",
-  "Mobius DAO Token"
+  "Mobius DAO Token",
+  undefined,
+  { coingeckoId: "mobius-money" }
 );
 
 export const CELO = makeTokens(
@@ -44,7 +49,9 @@ export const CELO = makeTokens(
   },
   18,
   "CELO",
-  "Celo native asset"
+  "Celo native asset",
+  undefined,
+  { coingeckoId: "celo" }
 );
 
 export const CUSD = makeTokens(
@@ -55,7 +62,9 @@ export const CUSD = makeTokens(
   },
   18,
   "cUSD",
-  "Celo Dollar"
+  "Celo Dollar",
+  undefined,
+  { coingeckoId: "celo-dollar" }
 );
 
 export const CEUR = makeTokens(
@@ -66,7 +75,9 @@ export const CEUR = makeTokens(
   },
   18,
   "cEUR",
-  "Celo Euro"
+  "Celo Euro",
+  undefined,
+  { coingeckoId: "celo-euro" }
 );
 
 export const CREAL = makeTokens(
@@ -88,7 +99,9 @@ export const UBE = makeTokens(
   },
   18,
   "UBE",
-  "Ubeswap"
+  "Ubeswap",
+  undefined,
+  { coingeckoId: "ubeswap" }
 );
 
 export const SUSHI = makeTokens(
@@ -99,7 +112,9 @@ export const SUSHI = makeTokens(
   },
   18,
   "SUSHI",
-  "Sushi"
+  "Sushi",
+  undefined,
+  { coingeckoId: "sushi" }
 );
 
 export const dCELO = makeTokens(
@@ -165,7 +180,9 @@ export const UST = makeTokens(
   },
   18,
   "UST",
-  "Allbridge UST"
+  "Allbridge UST",
+  undefined,
+  { coingeckoId: "terrausd" }
 );
 
 export const CETH = makeTokens(
@@ -189,7 +206,8 @@ export const WETH = makeTokens(
   18,
   "wETH",
   "Wrapped Ether (Optics Bridge)",
-  "https://etherscan.io/token/images/weth_28.png"
+  "https://etherscan.io/token/images/weth_28.png",
+  { coingeckoId: "weth" }
 );
 
 export const USDC = makeTokens(
@@ -201,7 +219,8 @@ export const USDC = makeTokens(
   6,
   "cUSDC",
   "US Dollar Coin (Optics Bridge)",
-  "https://bit.ly/3CwGimW"
+  "https://bit.ly/3CwGimW",
+  { coingeckoId: "usd-coin" }
 );
 
 export const DAI = makeTokens(
@@ -213,7 +232,8 @@ export const DAI = makeTokens(
   18,
   "DAI",
   "Optics DAI",
-  "https://raw.githubusercontent.com/ubeswap/default-token-list/master/assets/asset_DAI.png"
+  "https://raw.githubusercontent.com/ubeswap/default-token-list/master/assets/asset_DAI.png",
+  { coingeckoId: "dai" }
 );
 
 export const CBTC = makeTokens(
@@ -237,7 +257,8 @@ export const WBTC = makeTokens(
   8,
   "wBTC",
   "Wrapped Bitcoin (Optics Bridge)",
-  "https://etherscan.io/token/images/wbtc_28.png?v=1"
+  "https://etherscan.io/token/images/wbtc_28.png?v=1",
+  { coingeckoId: "wrapped-bitcoin" }
 );
 
 export const PUSDC = makeTokens(
@@ -249,7 +270,8 @@ export const PUSDC = makeTokens(
   6,
   "pUSDC",
   "USD Coin (PoS Optics)",
-  "https://bit.ly/3CwGimW"
+  "https://bit.ly/3CwGimW",
+  { coingeckoId: "usd-coin" }
 );
 
 export const USDC1 = makeTokens(
@@ -261,7 +283,8 @@ export const USDC1 = makeTokens(
   6,
   "cUSDCxV1",
   "US Dollar Coin (Optics Bridge)",
-  "https://bit.ly/3CwGimW"
+  "https://bit.ly/3CwGimW",
+  { coingeckoId: "usd-coin" }
 );
 
 export const AAUSDC = makeTokens(
@@ -273,7 +296,8 @@ export const AAUSDC = makeTokens(
   18,
   "aaUSDC",
   "US Dollar Coin (Avalanche Allbridge)",
-  "https://bit.ly/3CwGimW"
+  "https://bit.ly/3CwGimW",
+  { coingeckoId: "usd-coin" }
 );
 
 export const PUSD = makeTokens(
@@ -333,7 +357,8 @@ export const ASUSDC = makeTokens(
   18,
   "asUSDC",
   "US Dollar Coin (Solana Allbridge)",
-  "https://bit.ly/3CwGimW"
+  "https://bit.ly/3CwGimW",
+  { coingeckoId: "usd-coin" }
 );
 
 export const PUSDC1 = makeTokens(
@@ -345,7 +370,8 @@ export const PUSDC1 = makeTokens(
   6,
   "pUSDCxV1",
   "USD Coin (PoS Optics)",
-  "https://bit.ly/3CwGimW"
+  "https://bit.ly/3CwGimW",
+  { coingeckoId: "usd-coin" }
 );
 
 export const WBTC1 = makeTokens(
@@ -357,7 +383,8 @@ export const WBTC1 = makeTokens(
   8,
   "wBTCxV1",
   "Wrapped Bitcoin (Optics Bridge)",
-  "https://etherscan.io/token/images/wbtc_28.png?v=1"
+  "https://etherscan.io/token/images/wbtc_28.png?v=1",
+  { coingeckoId: "wrapped-bitcoin" }
 );
 
 export const WETH1 = makeTokens(
@@ -369,7 +396,8 @@ export const WETH1 = makeTokens(
   18,
   "wETHxV1",
   "Wrapped Ether (Optics Bridge)",
-  "https://etherscan.io/token/images/weth_28.png"
+  "https://etherscan.io/token/images/weth_28.png",
+  { coingeckoId: "weth" }
 );
 
 export const USDTM = makeTokens(
@@ -381,7 +409,8 @@ export const USDTM = makeTokens(
   18,
   "cUSDTm",
   "Tether (Moss Bridge)",
-  "https://bit.ly/3AMrCyD"
+  "https://bit.ly/3AMrCyD",
+  { coingeckoId: "tether" }
 );
 
 export const USDCM = makeTokens(
@@ -393,7 +422,8 @@ export const USDCM = makeTokens(
   18,
   "cUSDCm",
   "US Dollar Coin (Moss Bridge)",
-  "https://bit.ly/3CwGimW"
+  "https://bit.ly/3CwGimW",
+  { coingeckoId: "usd-coin" }
 );
 
 export const PCELO1 = makeTokens(
@@ -429,7 +459,8 @@ export const POOF = makeTokens(
   18,
   "Poof",
   "POOF",
-  "https://raw.githubusercontent.com/ubeswap/default-token-list/master/assets/asset_POOF.png"
+  "https://raw.githubusercontent.com/ubeswap/default-token-list/master/assets/asset_POOF.png",
+  { coingeckoId: "poofcash" }
 );
 
 export const MOO = makeTokens(
@@ -441,5 +472,6 @@ export const MOO = makeTokens(
   18,
   "Moola",
   "MOO",
-  "https://raw.githubusercontent.com/ubeswap/default-token-list/master/assets/asset_MOO.png"
+  "https://raw.githubusercontent.com/ubeswap/default-token-list/master/assets/asset_MOO.png",
+  { coingeckoId: "moola-market" }
 );
