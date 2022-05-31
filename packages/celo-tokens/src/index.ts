@@ -1,4 +1,5 @@
 import { ChainId } from "@dahlia-labs/celo-contrib";
+import type { TokenExtensions } from "@dahlia-labs/token-utils";
 import { Token } from "@dahlia-labs/token-utils";
 import mapValues from "lodash.mapvalues";
 
@@ -10,6 +11,7 @@ export const makeTokens = (
   decimals: number,
   symbol: string,
   name: string,
+  extensions?: TokenExtensions,
   logoURI?: string
 ): { [net in ChainId]: Token } => {
   return mapValues(addresses, (tokenAddress, network) => {
@@ -21,6 +23,7 @@ export const makeTokens = (
       name,
       logoURI:
         logoURI ?? imageRegistry.concat(symbol.toLowerCase()).concat(".svg"),
+      extensions,
     });
   });
 };
@@ -33,7 +36,8 @@ export const MOBI = makeTokens(
   },
   18,
   "MOBI",
-  "Mobius DAO Token"
+  "Mobius DAO Token",
+  { coingeckoId: "mobius-money" }
 );
 
 export const CELO = makeTokens(
@@ -44,7 +48,8 @@ export const CELO = makeTokens(
   },
   18,
   "CELO",
-  "Celo native asset"
+  "Celo native asset",
+  { coingeckoId: "celo" }
 );
 
 export const CUSD = makeTokens(
@@ -55,7 +60,8 @@ export const CUSD = makeTokens(
   },
   18,
   "cUSD",
-  "Celo Dollar"
+  "Celo Dollar",
+  { coingeckoId: "celo-dollar" }
 );
 
 export const CEUR = makeTokens(
@@ -66,7 +72,8 @@ export const CEUR = makeTokens(
   },
   18,
   "cEUR",
-  "Celo Euro"
+  "Celo Euro",
+  { coingeckoId: "celo-euro" }
 );
 
 export const CREAL = makeTokens(
