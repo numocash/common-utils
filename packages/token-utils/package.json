@@ -1,7 +1,7 @@
 {
   "name": "@dahlia-labs/token-utils",
   "description": "Token-related math and transaction utilities.",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/DahliaLabs/dahlia-common.git"
@@ -20,7 +20,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@dahlia-labs/celo-contrib": "^0.4.2",
+    "@dahlia-labs/celo-contrib": "^0.4.3",
     "@ubeswap/token-math": "^5.0.0",
     "tiny-invariant": "^1.2.0",
     "tslib": "^2.4.0"
