@@ -11,8 +11,8 @@ export const makeTokens = (
   decimals: number,
   symbol: string,
   name: string,
-  extensions?: TokenExtensions,
-  logoURI?: string
+  logoURI?: string,
+  extensions?: TokenExtensions
 ): { [net in ChainId]: Token } => {
   return mapValues(addresses, (tokenAddress, network) => {
     return new Token({
@@ -37,6 +37,7 @@ export const MOBI = makeTokens(
   18,
   "MOBI",
   "Mobius DAO Token",
+  undefined,
   { coingeckoId: "mobius-money" }
 );
 
@@ -49,6 +50,7 @@ export const CELO = makeTokens(
   18,
   "CELO",
   "Celo native asset",
+  undefined,
   { coingeckoId: "celo" }
 );
 
@@ -61,6 +63,7 @@ export const CUSD = makeTokens(
   18,
   "cUSD",
   "Celo Dollar",
+  undefined,
   { coingeckoId: "celo-dollar" }
 );
 
@@ -73,6 +76,7 @@ export const CEUR = makeTokens(
   18,
   "cEUR",
   "Celo Euro",
+  undefined,
   { coingeckoId: "celo-euro" }
 );
 
