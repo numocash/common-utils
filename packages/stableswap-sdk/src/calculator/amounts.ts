@@ -1,10 +1,31 @@
 import type { Token } from "@dahlia-labs/token-utils";
-import { Fraction, ONE, TokenAmount, ZERO } from "@dahlia-labs/token-utils";
+import {
+  Fraction,
+  ONE,
+  TEN,
+  TokenAmount,
+  ZERO,
+} from "@dahlia-labs/token-utils";
 import JSBI from "jsbi";
 import mapValues from "lodash.mapvalues";
 
 import type { Fees, IExchangeInfo } from "../entities";
 import { computeD, computeY } from "./curve";
+
+export const normalizeAmount = (tokenAmount: TokenAmount): JSBI =>
+  JSBI.multiply(
+    tokenAmount.raw,
+    JSBI.exponentiate(TEN, JSBI.BigInt(18 - tokenAmount.token.decimals))
+  );
+
+export const denormalizeAmount = (tokenAmount: TokenAmount): TokenAmount =>
+  new TokenAmount(
+    tokenAmount.token,
+    JSBI.divide(
+      tokenAmount.raw,
+      JSBI.exponentiate(TEN, JSBI.BigInt(18 - tokenAmount.token.decimals))
+    )
+  );
 
 /**
  * Calculates the current virtual price of the exchange.
@@ -22,8 +43,8 @@ export const calculateVirtualPrice = (
   const price = new Fraction(
     computeD(
       exchange.ampFactor,
-      exchange.reserves[0].raw,
-      exchange.reserves[1].raw
+      normalizeAmount(exchange.reserves[0]),
+      normalizeAmount(exchange.reserves[1])
     ),
     amount.raw
   );
@@ -67,11 +88,11 @@ export const calculateEstimatedSwapOutputAmount = (
   const amp = exchange.ampFactor;
 
   const amountBeforeFees = JSBI.subtract(
-    toReserves.raw,
+    normalizeAmount(toReserves),
     computeY(
       amp,
-      JSBI.add(fromReserves.raw, fromAmount.raw),
-      computeD(amp, fromReserves.raw, toReserves.raw)
+      JSBI.add(normalizeAmount(fromReserves), normalizeAmount(fromAmount)),
+      computeD(amp, normalizeAmount(fromReserves), normalizeAmount(toReserves))
     )
   );
 
@@ -82,12 +103,12 @@ export const calculateEstimatedSwapOutputAmount = (
 
   const fee = new TokenAmount(
     toReserves.token,
-    exchange.fees.trade.asFraction.multiply(amountBeforeFees).toFixed(0)
+    exchange.fees.trade.asFraction.multiply(amountBeforeFees).quotient
   );
 
   const adminFee = new TokenAmount(
     toReserves.token,
-    exchange.fees.admin.asFraction.multiply(fee.raw).toFixed(0)
+    exchange.fees.admin.asFraction.multiply(fee.raw).quotient
   );
   const lpFee = fee.subtract(adminFee);
 
@@ -97,11 +118,11 @@ export const calculateEstimatedSwapOutputAmount = (
   );
 
   return {
-    outputAmountBeforeFees,
-    outputAmount,
-    fee: fee,
-    lpFee,
-    adminFee,
+    outputAmountBeforeFees: denormalizeAmount(outputAmountBeforeFees),
+    outputAmount: denormalizeAmount(outputAmount),
+    fee: denormalizeAmount(fee),
+    lpFee: denormalizeAmount(lpFee),
+    adminFee: denormalizeAmount(adminFee),
   };
 };
 
@@ -144,10 +165,18 @@ export const calculateEstimatedWithdrawOneAmount = ({
 
   const { ampFactor, fees } = exchange;
 
-  const [baseReserves, quoteReserves] = [
-    exchange.reserves.find((r) => r.token.equals(withdrawToken))?.raw ?? ZERO,
-    exchange.reserves.find((r) => !r.token.equals(withdrawToken))?.raw ?? ZERO,
-  ];
+  const withdrawReserves = exchange.reserves.find((r) =>
+    r.token.equals(withdrawToken)
+  );
+  const nonWithdrawReserves = exchange.reserves.find(
+    (r) => !r.token.equals(withdrawToken)
+  );
+  const baseReserves = withdrawReserves
+    ? normalizeAmount(withdrawReserves)
+    : ZERO;
+  const quoteReserves = nonWithdrawReserves
+    ? normalizeAmount(nonWithdrawReserves)
+    : ZERO;
 
   const d_0 = computeD(ampFactor, baseReserves, quoteReserves);
   const d_1 = JSBI.subtract(
@@ -261,7 +290,7 @@ export const calculateEstimatedWithdrawAmount = ({
   const share = poolTokenAmount.divide(lpTotalSupply);
 
   const withdrawAmounts = reserves.map((amount) => {
-    const baseAmount = share.multiply(amount.raw);
+    const baseAmount = share.multiply(normalizeAmount(amount));
     const fee = baseAmount.multiply(fees.withdraw.asFraction);
     return [
       new TokenAmount(
@@ -316,21 +345,28 @@ export const calculateEstimatedMintAmount = (
 
   const amp = exchange.ampFactor;
   const [reserveA, reserveB] = exchange.reserves;
-  const d0 = computeD(amp, reserveA.raw, reserveB.raw);
+  const d0 = computeD(
+    amp,
+    normalizeAmount(reserveA),
+    normalizeAmount(reserveB)
+  );
 
   const d1 = computeD(
     amp,
-    JSBI.add(reserveA.raw, depositAmountA),
-    JSBI.add(reserveB.raw, depositAmountB)
+    JSBI.add(normalizeAmount(reserveA), depositAmountA),
+    JSBI.add(normalizeAmount(reserveB), depositAmountB)
   );
   if (JSBI.lessThan(d1, d0)) {
     throw new Error("New D cannot be less than previous D");
   }
 
-  const oldBalances = exchange.reserves.map((r) => r.raw) as [JSBI, JSBI];
+  const oldBalances = exchange.reserves.map((r) => normalizeAmount(r)) as [
+    JSBI,
+    JSBI
+  ];
   const newBalances = [
-    JSBI.add(reserveA.raw, depositAmountA),
-    JSBI.add(reserveB.raw, depositAmountB),
+    JSBI.add(normalizeAmount(reserveA), depositAmountA),
+    JSBI.add(normalizeAmount(reserveB), depositAmountB),
   ] as const;
   const adjustedBalances = newBalances.map((newBalance, i) => {
     const oldBalance = oldBalances[i] as JSBI;
