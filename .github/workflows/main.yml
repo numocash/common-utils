@@ -31,6 +31,14 @@ jobs:
       - run: yarn build
       - run: yarn lint:ci
 
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/yarn
+      - run: yarn build
+      - run: yarn test
+
   doctor:
     runs-on: ubuntu-latest
     steps:
