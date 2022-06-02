@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.4.6 (2022-06-02)
+
+**Note:** Version bump only for package @dahlia-labs/celo-tokens
+
+
+
+
+
 ## 0.4.4 (2022-05-31)
 
 **Note:** Version bump only for package @dahlia-labs/celo-tokens

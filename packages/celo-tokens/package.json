@@ -1,7 +1,7 @@
 {
   "name": "@dahlia-labs/celo-tokens",
   "description": "Common token list for Celo.",
-  "version": "0.4.5",
+  "version": "0.4.6",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/DahliaLabs/dahlia-common.git"
@@ -20,8 +20,8 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@dahlia-labs/celo-contrib": "^0.4.5",
-    "@dahlia-labs/token-utils": "^0.4.5",
+    "@dahlia-labs/celo-contrib": "^0.4.6",
+    "@dahlia-labs/token-utils": "^0.4.6",
     "@ubeswap/token-math": "^5.0.0",
     "lodash.mapvalues": "^4.6.0",
     "tiny-invariant": "^1.2.0",
