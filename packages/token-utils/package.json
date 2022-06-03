@@ -47,5 +47,6 @@
   "bugs": {
     "url": "https://github.com/DahliaLabs/dahlia-common/issues"
   },
-  "homepage": "https://github.com/DahliaLabs/dahlia-common#readme"
+  "homepage": "https://github.com/DahliaLabs/dahlia-common#readme",
+  "gitHead": "debe9ef552b8334b5348c8ad43418d9b2db84d55"
 }

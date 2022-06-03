@@ -308,12 +308,15 @@ export const calculateEstimatedWithdrawAmount = ({
   ];
 
   return {
-    withdrawAmountsBeforeFees: withdrawAmounts.map(
-      ([amt, { beforeFees }]) => new TokenAmount(amt.token, beforeFees)
+    withdrawAmountsBeforeFees: withdrawAmounts.map(([amt, { beforeFees }]) =>
+      denormalizeAmount(new TokenAmount(amt.token, beforeFees))
     ) as [TokenAmount, TokenAmount],
-    withdrawAmounts: [withdrawAmounts[0][0], withdrawAmounts[1][0]],
-    fees: withdrawAmounts.map(
-      ([amt, { fee }]) => new TokenAmount(amt.token, fee)
+    withdrawAmounts: [
+      denormalizeAmount(withdrawAmounts[0][0]),
+      denormalizeAmount(withdrawAmounts[1][0]),
+    ],
+    fees: withdrawAmounts.map(([amt, { fee }]) =>
+      denormalizeAmount(new TokenAmount(amt.token, fee))
     ) as [TokenAmount, TokenAmount],
   };
 };

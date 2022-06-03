@@ -43,7 +43,7 @@ export class TokenAmount extends UTokenAmount<Token> {
    * Formats the token amount with units and decimal adjustment, e.g. "100.42 SOL"
    * @returns
    */
-  formatUnits(format: NumberFormat = { groupSeparator: "," }): string {
+  override formatUnits(format: NumberFormat = { groupSeparator: "," }): string {
     return `${this.toExact(format)} ${this.token.symbol}`;
   }
 
