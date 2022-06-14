@@ -55,6 +55,7 @@ export interface IExchange {
  */
 export interface IExchangeInfo {
   ampFactor: JSBI;
+  paused: boolean;
   fees: Fees;
   lpTotalSupply: TokenAmount;
   reserves: readonly [TokenAmount, TokenAmount];
