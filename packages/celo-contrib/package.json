@@ -29,7 +29,7 @@
     "src/"
   ],
   "devDependencies": {
-    "@saberhq/tsconfig": "^1.13.24"
+    "@saberhq/tsconfig": "^1.13.28"
   },
   "publishConfig": {
     "access": "public"
