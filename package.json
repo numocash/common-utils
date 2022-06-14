@@ -56,6 +56,7 @@
   "version": "0.0.0",
   "packageManager": "yarn@3.2.1",
   "dependencies": {
+    "@saberhq/eslint-config": "^1.13.28",
     "@saberhq/eslint-config-react": "^1.13.28",
     "@saberhq/tsconfig": "^1.13.28",
     "ts-jest": "^28.0.5"

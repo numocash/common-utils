@@ -1,4 +1,4 @@
-import type { BigintIsh, NumberFormat } from "@ubeswap/token-math";
+import type { BigintIsh, FractionObject } from "@ubeswap/token-math";
 import {
   parseAmountFromString,
   TokenAmount as UTokenAmount,
@@ -6,15 +6,19 @@ import {
 
 import type { Token } from "./token";
 
-export interface IFormatUint {
+export interface TokenAmountObject extends FractionObject {
   /**
-   * If specified, format this according to `toLocaleString`
+   * Discriminator to show this is a token amount.
    */
-  numberFormatOptions?: Intl.NumberFormatOptions;
+  _isTA: true;
   /**
-   * Locale of the number
+   * Mint of the token.
    */
-  locale?: string;
+  mint: string;
+  /**
+   * Amount of tokens in string representation.
+   */
+  uiAmount: string;
 }
 
 export class TokenAmount extends UTokenAmount<Token> {
@@ -35,16 +39,8 @@ export class TokenAmount extends UTokenAmount<Token> {
    * @returns
    */
   static parse(token: Token, uiAmount: string): TokenAmount {
-    const prev = parseAmountFromString(token, uiAmount);
+    const prev = parseAmountFromString(token, uiAmount, ".", ",");
     return new TokenAmount(token, prev);
-  }
-
-  /**
-   * Formats the token amount with units and decimal adjustment, e.g. "100.42 SOL"
-   * @returns
-   */
-  override formatUnits(format: NumberFormat = { groupSeparator: "," }): string {
-    return `${this.toExact(format)} ${this.token.symbol}`;
   }
 
   /**
@@ -57,21 +53,9 @@ export class TokenAmount extends UTokenAmount<Token> {
   /**
    * JSON representation of the token amount.
    */
-  toJSON(): {
-    /**
-     * Discriminator to show this is a token amount.
-     */
-    _isTA: true;
-    /**
-     * Mint of the token.
-     */
-    mint: string;
-    /**
-     * Amount of tokens in string representation.
-     */
-    uiAmount: string;
-  } {
+  override toJSON(): TokenAmountObject {
     return {
+      ...super.toJSON(),
       _isTA: true,
       mint: this.token.address,
       uiAmount: this.toExact(),
