@@ -223,6 +223,19 @@ export const USDC = makeTokens(
   { coingeckoId: "usd-coin" }
 );
 
+export const USDCet = makeTokens(
+  {
+    [ChainId.Mainnet]: "0x37f750B7cC259A2f741AF45294f6a16572CF5cAd",
+    [ChainId.Alfajores]: "0x37f750B7cC259A2f741AF45294f6a16572CF5cAd",
+    [ChainId.Baklava]: "0x37f750B7cC259A2f741AF45294f6a16572CF5cAd",
+  },
+  6,
+  "USDCet",
+  "USDCet (Portal from Ethereum)",
+  "https://bit.ly/3CwGimW",
+  { coingeckoId: "usd-coin" }
+);
+
 export const DAI = makeTokens(
   {
     [ChainId.Mainnet]: "0x90Ca507a5D4458a4C6C6249d186b6dCb02a5BCCd",
