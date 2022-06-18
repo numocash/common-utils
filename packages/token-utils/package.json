@@ -32,7 +32,7 @@
     "src/"
   ],
   "devDependencies": {
-    "@saberhq/tsconfig": "^1.13.28",
+    "@saberhq/tsconfig": "^1.13.29",
     "@types/bn.js": "^5.1.0",
     "jsbi": "^4.3.0"
   },
