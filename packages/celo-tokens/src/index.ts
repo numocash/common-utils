@@ -498,19 +498,19 @@ export const STCELO = makeTokens(
   18,
   "stCELO",
   "Staked CELO",
-  undefined,
+  "https://raw.githubusercontent.com/DahliaLabs/dahlia-common/master/packages/celo-tokens/src/svgs/celo.svg",
   { coingeckoId: "celo" }
 );
 
 export const RSTCELO = makeTokens(
   {
-    [ChainId.Mainnet]: "0x6b8bb0ACA4bDE7E844DFA6F6bC90aD0a3D2352Aa",
-    [ChainId.Alfajores]: "0x6b8bb0ACA4bDE7E844DFA6F6bC90aD0a3D2352Aa",
-    [ChainId.Baklava]: "0x6b8bb0ACA4bDE7E844DFA6F6bC90aD0a3D2352Aa",
+    [ChainId.Mainnet]: "0xDc5762753043327d74e0a538199c1488FC1F44cf",
+    [ChainId.Alfajores]: "0xDc5762753043327d74e0a538199c1488FC1F44cf",
+    [ChainId.Baklava]: "0xDc5762753043327d74e0a538199c1488FC1F44cf",
   },
   18,
   "rstCELO",
   "Rebased Staked CELO",
-  undefined,
+  "https://raw.githubusercontent.com/DahliaLabs/dahlia-common/master/packages/celo-tokens/src/svgs/celo.svg",
   { coingeckoId: "celo" }
 );
