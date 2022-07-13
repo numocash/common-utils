@@ -488,3 +488,29 @@ export const MOO = makeTokens(
   "https://raw.githubusercontent.com/ubeswap/default-token-list/master/assets/asset_MOO.png",
   { coingeckoId: "moola-market" }
 );
+
+export const STCELO = makeTokens(
+  {
+    [ChainId.Mainnet]: "0xC668583dcbDc9ae6FA3CE46462758188adfdfC24",
+    [ChainId.Alfajores]: "0xC668583dcbDc9ae6FA3CE46462758188adfdfC24",
+    [ChainId.Baklava]: "0xC668583dcbDc9ae6FA3CE46462758188adfdfC24",
+  },
+  18,
+  "stCELO",
+  "Staked CELO",
+  undefined,
+  { coingeckoId: "celo" }
+);
+
+export const RSTCELO = makeTokens(
+  {
+    [ChainId.Mainnet]: "0x6b8bb0ACA4bDE7E844DFA6F6bC90aD0a3D2352Aa",
+    [ChainId.Alfajores]: "0x6b8bb0ACA4bDE7E844DFA6F6bC90aD0a3D2352Aa",
+    [ChainId.Baklava]: "0x6b8bb0ACA4bDE7E844DFA6F6bC90aD0a3D2352Aa",
+  },
+  18,
+  "rstCELO",
+  "Rebased Staked CELO",
+  undefined,
+  { coingeckoId: "celo" }
+);
