@@ -1,4 +1,4 @@
-# `dahlia-common`
+# `numoen-common`
 
 Common libraries across Dahlia projects.
 
