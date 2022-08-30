@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@dahlia-labs/celo-contrib": "^0.5.7",
-    "@ubeswap/token-math": "^5.1.6",
+    "@ubeswap/token-math": "^5.2.0",
     "tiny-invariant": "^1.2.0",
     "tslib": "^2.4.0"
   },
@@ -32,8 +32,8 @@
     "src/"
   ],
   "devDependencies": {
-    "@saberhq/tsconfig": "^1.13.29",
-    "@types/bn.js": "^5.1.0",
+    "@saberhq/tsconfig": "^1.13.32",
+    "@types/bn.js": "^5.1.1",
     "jsbi": "^4.3.0"
   },
   "peerDependencies": {
