@@ -337,6 +337,13 @@ export const calculateEstimatedMintAmount = (
   mintAmount: TokenAmount;
   fees: TokenAmount;
 } => {
+  const normalizedDepositAmountA = normalizeAmount(
+    new TokenAmount(exchange.reserves[0].token, depositAmountA)
+  );
+  const normalizedDepositAmountB = normalizeAmount(
+    new TokenAmount(exchange.reserves[1].token, depositAmountB)
+  );
+
   if (JSBI.equal(depositAmountA, ZERO) && JSBI.equal(depositAmountB, ZERO)) {
     const zero = new TokenAmount(exchange.lpTotalSupply.token, ZERO);
     return {
@@ -356,8 +363,8 @@ export const calculateEstimatedMintAmount = (
 
   const d1 = computeD(
     amp,
-    JSBI.add(normalizeAmount(reserveA), depositAmountA),
-    JSBI.add(normalizeAmount(reserveB), depositAmountB)
+    JSBI.add(normalizeAmount(reserveA), normalizedDepositAmountA),
+    JSBI.add(normalizeAmount(reserveB), normalizedDepositAmountB)
   );
   if (JSBI.lessThan(d1, d0)) {
     throw new Error("New D cannot be less than previous D");
@@ -368,8 +375,8 @@ export const calculateEstimatedMintAmount = (
     JSBI
   ];
   const newBalances = [
-    JSBI.add(normalizeAmount(reserveA), depositAmountA),
-    JSBI.add(normalizeAmount(reserveB), depositAmountB),
+    JSBI.add(normalizeAmount(reserveA), normalizedDepositAmountA),
+    JSBI.add(normalizeAmount(reserveB), normalizedDepositAmountB),
   ] as const;
   const adjustedBalances = newBalances.map((newBalance, i) => {
     const oldBalance = oldBalances[i] as JSBI;
