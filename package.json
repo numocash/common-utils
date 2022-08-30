@@ -54,7 +54,7 @@
     "doctor:packages": "yarn doctor packages/"
   },
   "version": "0.0.0",
-  "packageManager": "yarn@3.2.1",
+  "packageManager": "yarn@3.2.3",
   "dependencies": {
     "@saberhq/eslint-config": "^2.0.4",
     "@saberhq/eslint-config-react": "^2.0.4",
