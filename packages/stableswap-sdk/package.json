@@ -27,7 +27,7 @@
   "devDependencies": {
     "@types/bn.js": "^5.1.1",
     "@types/lodash.mapvalues": "^4.6.7",
-    "@types/node": "^18.7.14",
+    "@types/node": "^18.7.15",
     "bn.js": "^5.2.1",
     "jsbi": "^4.3.0"
   },
@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@dahlia-labs/token-utils": "^0.5.12",
-    "@saberhq/tsconfig": "^1.13.32",
+    "@saberhq/tsconfig": "^2.0.4",
     "lodash.mapvalues": "^4.6.0",
     "tslib": "^2.4.0"
   },

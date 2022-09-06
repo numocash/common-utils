@@ -37,7 +37,7 @@
     "src/"
   ],
   "devDependencies": {
-    "@saberhq/tsconfig": "^1.13.32",
+    "@saberhq/tsconfig": "^2.0.4",
     "@types/bn.js": "^5.1.1",
     "@types/lodash.mapvalues": "^4.6.7",
     "jsbi": "^4.3.0"
