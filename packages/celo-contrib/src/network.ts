@@ -22,7 +22,7 @@ export const Alfajores: Network = {
   name: NetworkNames.Alfajores,
   rpcUrl: "https://alfajores-forno.celo-testnet.org",
   graphQl: "https://alfajores-blockscout.celo-testnet.org/graphiql",
-  explorer: "https://alfajores-blockscout.celo-testnet.org",
+  explorer: "https://alfajores.celoscan.io/",
   chainId: ChainId.Alfajores,
 };
 export const Baklava: Network = {
@@ -36,7 +36,7 @@ export const Mainnet: Network = {
   name: NetworkNames.Mainnet,
   rpcUrl: "https://forno.celo.org",
   graphQl: "https://explorer.celo.org/graphiql",
-  explorer: "https://explorer.celo.org",
+  explorer: "https://celoscan.io",
   chainId: ChainId.Mainnet,
 };
 

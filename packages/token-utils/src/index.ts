@@ -1,5 +1,4 @@
 export * from "./price";
-export * from "./splTokenRegistry";
 export * from "./token";
 export * from "./tokenAmount";
 export * from "./tokenList";

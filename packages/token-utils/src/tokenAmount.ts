@@ -12,10 +12,6 @@ export interface TokenAmountObject extends FractionObject {
    */
   _isTA: true;
   /**
-   * Mint of the token.
-   */
-  mint: string;
-  /**
    * Amount of tokens in string representation.
    */
   uiAmount: string;
@@ -57,7 +53,6 @@ export class TokenAmount extends UTokenAmount<Token> {
     return {
       ...super.toJSON(),
       _isTA: true,
-      mint: this.token.address,
       uiAmount: this.toExact(),
     };
   }
