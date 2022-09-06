@@ -14,6 +14,9 @@
     "@babel/preset-env": "^7.18.10",
     "@babel/preset-typescript": "^7.18.6",
     "@rushstack/eslint-patch": "^1.1.4",
+    "@saberhq/eslint-config": "^2.0.4",
+    "@saberhq/eslint-config-react": "^2.0.4",
+    "@saberhq/tsconfig": "^2.0.4",
     "@size-limit/file": "^8.0.1",
     "@size-limit/webpack": "^8.0.1",
     "@types/babel__core": "^7.1.19",
@@ -36,6 +39,7 @@
     "prettier": "^2.7.1",
     "size-limit": "^8.0.1",
     "source-map-support": "^0.5.21",
+    "ts-jest": "^28.0.8",
     "ts-node": "^10.9.1",
     "typedoc": "^0.23.11",
     "typescript": "^4.7.4"
@@ -54,11 +58,5 @@
     "doctor:packages": "yarn doctor packages/"
   },
   "version": "0.0.0",
-  "packageManager": "yarn@3.2.3",
-  "dependencies": {
-    "@saberhq/eslint-config": "^2.0.4",
-    "@saberhq/eslint-config-react": "^2.0.4",
-    "@saberhq/tsconfig": "^1.13.32",
-    "ts-jest": "^28.0.8"
-  }
+  "packageManager": "yarn@3.2.3"
 }
