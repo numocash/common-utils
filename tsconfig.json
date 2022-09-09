@@ -1,8 +1,17 @@
 {
   "extends": "@saberhq/tsconfig/tsconfig.react.json",
   "compilerOptions": {
-    "jsx": "react",
-    "jsxImportSource": "",
+    "allowJs": true,
+    "noEmit": true,
+    "jsxImportSource": "react",
     "types": ["jest"]
-  }
+  },
+  "files": ["jest.config.mjs", ".eslintrc.cjs"],
+  "include": ["./**/*.test.ts"],
+  "references": [
+    { "path": "packages/celo-contrib/" },
+    { "path": "packages/celo-tokens/" },
+    { "path": "packages/stableswap-sdk/" },
+    { "path": "packages/token-utils/" }
+  ]
 }

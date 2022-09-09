@@ -1,10 +1,9 @@
 {
-  "extends": "@saberhq/tsconfig/tsconfig.lib.json",
+  "extends": "@saberhq/tsconfig/tsconfig.mono.json",
   "compilerOptions": {
-    "outDir": "dist/esm/",
-    "noEmit": false
+    "rootDir": "src/",
+    "outDir": "dist/esm/"
   },
   "include": ["src/"],
-  "exclude": ["**/*.test.ts"],
-  "esModuleInterop": true
+  "exclude": ["**/*.test.ts"]
 }

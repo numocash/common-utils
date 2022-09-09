@@ -15,13 +15,18 @@
     "pinnata"
   ],
   "scripts": {
-    "build": "tsc && tsc -P tsconfig.esm.json",
-    "clean": "rm -fr dist/",
-    "prepublishOnly": "npm run build"
+    "build": "tsc && tsc -P tsconfig.cjs.json",
+    "clean": "rm -rf dist"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
   },
   "dependencies": {
-    "@dahlia-labs/celo-contrib": "^0.6.0",
-    "@dahlia-labs/token-utils": "^0.6.0",
+    "@dahlia-labs/celo-contrib": "workspace:^",
+    "@dahlia-labs/token-utils": "workspace:^",
     "@ubeswap/token-math": "^5.2.0",
     "lodash.mapvalues": "^4.6.0",
     "tiny-invariant": "^1.2.0",
@@ -40,7 +45,8 @@
     "@saberhq/tsconfig": "^2.0.4",
     "@types/bn.js": "^5.1.1",
     "@types/lodash.mapvalues": "^4.6.7",
-    "jsbi": "^4.3.0"
+    "jsbi": "^4.3.0",
+    "typescript": "^4.8.3"
   },
   "peerDependencies": {
     "bn.js": "^4 || ^5",
@@ -49,7 +55,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "types": "./dist/cjs/index.d.ts",
   "bugs": {
     "url": "https://github.com/DahliaLabs/dahlia-common/issues"
   },
