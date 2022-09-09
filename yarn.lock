@@ -1491,7 +1491,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dahlia-labs/celo-contrib@^0.6.1, @dahlia-labs/celo-contrib@workspace:^, @dahlia-labs/celo-contrib@workspace:packages/celo-contrib":
+"@dahlia-labs/celo-contrib@^0.6.2, @dahlia-labs/celo-contrib@workspace:^, @dahlia-labs/celo-contrib@workspace:packages/celo-contrib":
   version: 0.0.0-use.local
   resolution: "@dahlia-labs/celo-contrib@workspace:packages/celo-contrib"
   dependencies:
@@ -1588,7 +1588,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@dahlia-labs/token-utils@workspace:packages/token-utils"
   dependencies:
-    "@dahlia-labs/celo-contrib": ^0.6.1
+    "@dahlia-labs/celo-contrib": ^0.6.2
     "@saberhq/tsconfig": ^2.0.4
     "@types/bn.js": ^5.1.1
     "@ubeswap/token-math": ^5.2.0
