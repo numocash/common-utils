@@ -38,15 +38,17 @@ jobs:
       - run: yarn build
       - run: yarn workspaces foreach -t version ${{ github.event.inputs.version }}
       - run: yarn docs:generate
-      - name: Perform Git release
+      - id: git-release
+        name: Perform Git release
         run: |
-          VERSION=$(node -e "console.log(require('./lerna.json').version);")
+          VERSION=$(node -e "console.log(require('./package.json').version);")
           git config user.name "GitHub Actions"
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add .
           git commit -a -m "Release v$VERSION"
           git tag "v$VERSION"
           git push origin HEAD --tags
+          echo "::set-output name=version::v$VERSION"
       - name: Release
         uses: softprops/action-gh-release@v1
         with:

@@ -39,9 +39,9 @@ jobs:
       - run: yarn build
       - run: yarn test
 
-  doctor:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/actions/yarn
-      - run: yarn doctor packages/
+  # doctor:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: ./.github/actions/yarn
+  #     - run: yarn doctor packages/
