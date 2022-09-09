@@ -12,14 +12,19 @@
     "type": "git",
     "url": "git+ssh://git@github.com/DahliaLabs/dahlia-common.git"
   },
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
   "author": "Kyle Scott <kyle@dahlia.finance>",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "license": "Apache-2.0",
   "scripts": {
     "build": "tsc && tsc -P tsconfig.cjs.json",
-    "clean": "rm -rf dist",
-    "test": "jest"
+    "clean": "rm -rf dist"
   },
   "engines": {
     "node": ">=12.x"
@@ -29,14 +34,15 @@
     "@types/lodash.mapvalues": "^4.6.7",
     "@types/node": "^18.7.15",
     "bn.js": "^5.2.1",
-    "jsbi": "^4.3.0"
+    "jsbi": "^4.3.0",
+    "typescript": "^4.8.3"
   },
   "peerDependencies": {
     "bn.js": ">=5",
     "jsbi": "^3 || ^4"
   },
   "dependencies": {
-    "@dahlia-labs/token-utils": "^0.6.0",
+    "@dahlia-labs/token-utils": "workspace:^",
     "@saberhq/tsconfig": "^2.0.4",
     "lodash.mapvalues": "^4.6.0",
     "tslib": "^2.4.0"
@@ -48,7 +54,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "types": "./dist/cjs/index.d.ts",
   "bugs": {
     "url": "https://github.com/DahliaLabs/dahlia-common/issues"
   },
