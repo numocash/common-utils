@@ -18,7 +18,7 @@ export type Multicall<T> = Readonly<{
 
 export type Metacall<T, U extends unknown[]> = Readonly<{
   multicalls: readonly [...{ [I in keyof U]: Multicall<U[I]> }];
-  metaParse: (data: U) => T;
+  metaParse: (data: Readonly<U>) => Readonly<T>;
 }>;
 
 export const getTokenMetacall = (

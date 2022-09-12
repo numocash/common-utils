@@ -23,9 +23,15 @@ export const getMulticall = (
 //   metaParse: (data: U) => T;
 // }>;
 
+//: Promise<readonly [...{ [I in keyof T]: ReturnType<T[I]> }]>
+
 // T is the return types of the various metacalls
-export async function fetchMetacalls<T extends { a: unknown; b: unknown[] }[]>(
-  metacalls: readonly [...{ [I in keyof T]: Metacall<T[I]["a"], T[I]["b"]> }],
+export async function fetchMetacalls<
+  T extends ((data: unknown[]) => unknown)[]
+>(
+  metacalls: readonly [
+    ...{ [I in keyof T]: Metacall<ReturnType<T[I]>, Parameters<T[I]>> }
+  ],
   multicallContract: Multicall2,
   maxChunk = 100
 ) {
@@ -60,8 +66,11 @@ export async function fetchMetacalls<T extends { a: unknown; b: unknown[] }[]>(
     remainingData = remainingData.slice(chunkSize);
   }
 
-  return metacalls.map((m, i) =>
-    m.metaParse((chunkedData as readonly [...{ [I in keyof T]: T[I]["b"] }])[i])
+  return metacalls.map(
+    (m, i) =>
+      m.metaParse(
+        (chunkedData as readonly [...{ [I in keyof T]: Parameters<T[I]> }])[i]
+      ) as [...{ [I in keyof T]: ReturnType<T[I]> }][typeof i]
   );
 }
 

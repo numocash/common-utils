@@ -116,7 +116,7 @@ export const getToken = async (
 ): Promise<Token | null> => {
   const metacall = getTokenMetacall(address, chainId);
 
-  return await fetchMetacalls([metacall] as const, multicallContract);
+  return await fetchMetacalls([metacall], multicallContract);
 };
 
 // want meta callbacks that take multiple multicalls and return one type
