@@ -1,5 +1,4 @@
-import type { Token } from "@dahlia-labs/token-utils";
-import { TokenAmount } from "@dahlia-labs/token-utils";
+import { Token, TokenAmount } from "@dahlia-labs/token-utils";
 import { Interface } from "@ethersproject/abi";
 import { AddressZero } from "@ethersproject/constants";
 
@@ -7,7 +6,7 @@ import ERC20_ABI from "./abis/erc20.json";
 import { getContract } from "./contracts";
 import type { Erc20, Erc20Interface } from "./generated/Erc20";
 import type { Multicall2 } from "./index";
-import { fetchMetacalls, getTokenMetacall } from "./index";
+import { fetchMulticalls } from "./index";
 import type { Multicall, ProviderOrSigner } from "./types";
 
 export function getTokenInterface(): Erc20Interface {
@@ -114,9 +113,22 @@ export const getToken = async (
   address: string,
   chainId: number
 ): Promise<Token | null> => {
-  const metacall = getTokenMetacall(address, chainId);
+  const multicallData = await fetchMulticalls(
+    [
+      nameMulticall(address),
+      symbolMulticall(address),
+      decimalsMulticall(address),
+    ],
+    multicallContract
+  );
 
-  return await fetchMetacalls([metacall] as const, multicallContract);
+  return new Token({
+    chainId,
+    address,
+    name: multicallData[0],
+    symbol: multicallData[1],
+    decimals: multicallData[2],
+  });
 };
 
 // want meta callbacks that take multiple multicalls and return one type
