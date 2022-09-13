@@ -2,7 +2,8 @@
   "extends": "@saberhq/tsconfig/tsconfig.mono.json",
   "compilerOptions": {
     "rootDir": "src/",
-    "outDir": "dist/esm/"
+    "outDir": "dist/esm/",
+    "composite": false
   },
-  "include": ["src/", "src/abis/", "src/generated/"]
+  "include": ["src/"]
 }

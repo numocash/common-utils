@@ -130,5 +130,3 @@ export const getToken = async (
     decimals: multicallData[2],
   });
 };
-
-// want meta callbacks that take multiple multicalls and return one type
