@@ -2,7 +2,7 @@ import { Fraction, Percent } from "@dahlia-labs/token-utils";
 import type { Multicall, ProviderOrSigner } from "@dahlia-labs/use-ethers";
 import { getContract } from "@dahlia-labs/use-ethers";
 import { Interface } from "@ethersproject/abi";
-import type { BigNumber } from "@ethersproject/bignumber";
+import type { BigNumber, BigNumberish } from "@ethersproject/bignumber";
 import JSBI from "jsbi";
 
 import LPTOKEN_ABI from "./abis/LPToken.json";
@@ -108,6 +108,29 @@ export const tokenBalanceMulticall = (
       new Fraction(
         swapInterface
           .decodeFunctionResult("getTokenBalance", returnData)
+          .toString()
+      ),
+  } as const);
+
+export const calculateSwapMulticall = (
+  swapAddress: string,
+  fromIndex: number,
+  toIndex: number,
+  amountIn: BigNumberish
+): Multicall<Fraction> =>
+  ({
+    call: {
+      target: swapAddress,
+      callData: swapInterface.encodeFunctionData("calculateSwap", [
+        fromIndex,
+        toIndex,
+        amountIn,
+      ]),
+    },
+    parseReturn: (returnData: string) =>
+      new Fraction(
+        swapInterface
+          .decodeFunctionResult("calculateSwap", returnData)
           .toString()
       ),
   } as const);
