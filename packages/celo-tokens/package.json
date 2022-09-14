@@ -27,7 +27,7 @@
   "dependencies": {
     "@dahlia-labs/celo-contrib": "workspace:^",
     "@dahlia-labs/token-utils": "workspace:^",
-    "@ubeswap/token-math": "^5.2.0",
+    "@ubeswap/token-math": "^5.2.1",
     "lodash.mapvalues": "^4.6.0",
     "tiny-invariant": "^1.2.0",
     "tslib": "^2.4.0"
@@ -42,7 +42,7 @@
     "src/"
   ],
   "devDependencies": {
-    "@saberhq/tsconfig": "^2.0.4",
+    "@saberhq/tsconfig": "^2.0.5",
     "@types/bn.js": "^5.1.1",
     "@types/lodash.mapvalues": "^4.6.7",
     "jsbi": "^4.3.0",

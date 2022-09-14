@@ -42,8 +42,6 @@ export interface SwapStorage {
   defaultWithdrawFee: BigNumber;
 }
 
-type t = Awaited<ReturnType<Swap["getLpToken"]>>;
-
 export const LPMulticall = (swapAddress: string): Multicall<string> =>
   ({
     call: {

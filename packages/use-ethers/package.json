@@ -34,8 +34,8 @@
     "@ethersproject/address": "^5.7.0",
     "@ethersproject/constants": "^5.7.0",
     "@ethersproject/contracts": "^5.7.0",
-    "@ethersproject/providers": "^5.7.0",
-    "@ubeswap/token-math": "^5.2.0",
+    "@ethersproject/providers": "^5.7.1",
+    "@ubeswap/token-math": "^5.2.1",
     "lodash": "^4.17.21",
     "tiny-invariant": "^1.2.0",
     "tslib": "^2.4.0"
@@ -47,10 +47,10 @@
     "src/"
   ],
   "devDependencies": {
-    "@saberhq/tsconfig": "^2.0.4",
+    "@saberhq/tsconfig": "^2.0.5",
     "@typechain/ethers-v5": "^10.1.0",
-    "@types/lodash": "^4",
-    "ethers": "^5.7.0",
+    "@types/lodash": "^4.14.185",
+    "ethers": "^5.7.1",
     "jsbi": "^4.3.0",
     "typechain": "^8.1.0",
     "typescript": "^4.8.3"
