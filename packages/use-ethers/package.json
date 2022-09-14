@@ -1,7 +1,7 @@
 {
   "name": "@dahlia-labs/use-ethers",
   "description": "Multicall extensions to ethers.",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/DahliaLabs/dahlia-common.git"
