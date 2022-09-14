@@ -23,8 +23,8 @@
   "module": "dist/esm/index.js",
   "license": "Apache-2.0",
   "scripts": {
-    "build": "tsc && tsc -P tsconfig.cjs.json",
-    "clean": "rm -rf dist",
+    "build": "npm run typechain && tsc && tsc -P tsconfig.cjs.json",
+    "clean": "rm -fr dist/",
     "typechain": "typechain --target=ethers-v5 'src/**/abis/**/*.json' --out-dir src/generated/"
   },
   "engines": {

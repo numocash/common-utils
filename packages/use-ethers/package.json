@@ -23,8 +23,7 @@
   "scripts": {
     "build": "npm run typechain && tsc && tsc -P tsconfig.cjs.json",
     "clean": "rm -fr dist/",
-    "typechain": "typechain --target=ethers-v5 'src/**/abis/**/*.json' --out-dir src/generated/",
-    "prepublishOnly": "npm run build"
+    "typechain": "typechain --target=ethers-v5 'src/**/abis/**/*.json' --out-dir src/generated/"
   },
   "dependencies": {
     "@dahlia-labs/celo-contrib": "workspace:^",
