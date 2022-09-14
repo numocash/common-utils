@@ -23,18 +23,22 @@
   "module": "dist/esm/index.js",
   "license": "Apache-2.0",
   "scripts": {
-    "build": "tsc && tsc -P tsconfig.cjs.json",
-    "clean": "rm -rf dist"
+    "build": "npm run typechain && tsc && tsc -P tsconfig.cjs.json",
+    "clean": "rm -fr dist/",
+    "typechain": "typechain --target=ethers-v5 'src/**/abis/**/*.json' --out-dir src/generated/"
   },
   "engines": {
     "node": ">=12.x"
   },
   "devDependencies": {
+    "@typechain/ethers-v5": "^10.1.0",
     "@types/bn.js": "^5.1.1",
     "@types/lodash.mapvalues": "^4.6.7",
-    "@types/node": "^18.7.15",
+    "@types/node": "^18.7.18",
     "bn.js": "^5.2.1",
+    "ethers": "^5.7.1",
     "jsbi": "^4.3.0",
+    "typechain": "^8.1.0",
     "typescript": "^4.8.3"
   },
   "peerDependencies": {
@@ -43,7 +47,11 @@
   },
   "dependencies": {
     "@dahlia-labs/token-utils": "workspace:^",
-    "@saberhq/tsconfig": "^2.0.4",
+    "@dahlia-labs/use-ethers": "workspace:^",
+    "@ethersproject/abi": "^5.7.0",
+    "@ethersproject/bignumber": "^5.7.0",
+    "@ethersproject/providers": "^5.7.1",
+    "@saberhq/tsconfig": "^2.0.5",
     "lodash.mapvalues": "^4.6.0",
     "tslib": "^2.4.0"
   },
