@@ -1,6 +1,5 @@
 import { Token, TokenAmount } from "@dahlia-labs/token-utils";
 import { Interface } from "@ethersproject/abi";
-import { AddressZero } from "@ethersproject/constants";
 
 import ERC20_ABI from "./abis/erc20.json";
 import { getContract } from "./contracts";
@@ -27,14 +26,12 @@ export const getTokenContract = (
 
 export const balanceOfMulticall = (
   token: Token,
-  address: string | null
+  address: string
 ): Multicall<TokenAmount> =>
   ({
     call: {
       target: token.address,
-      callData: tokenInterface.encodeFunctionData("balanceOf", [
-        address ?? AddressZero,
-      ]),
+      callData: tokenInterface.encodeFunctionData("balanceOf", [address]),
     },
     parseReturn: (returnData: string) =>
       new TokenAmount(
@@ -90,15 +87,15 @@ export const totalSupplyMulticall = (token: Token): Multicall<TokenAmount> =>
 
 export const allowanceMulticall = (
   token: Token,
-  address: string | null,
-  spender: string | null
+  address: string,
+  spender: string
 ): Multicall<TokenAmount> =>
   ({
     call: {
       target: token.address,
       callData: tokenInterface.encodeFunctionData("allowance", [
-        address ?? AddressZero,
-        spender ?? AddressZero,
+        address,
+        spender,
       ]),
     },
     parseReturn: (returnData: string) =>
