@@ -29,8 +29,8 @@
     "@dahlia-labs/token-utils": "workspace:^",
     "@ubeswap/token-math": "^5.2.1",
     "lodash.mapvalues": "^4.6.0",
-    "tiny-invariant": "^1.2.0",
-    "tslib": "^2.4.0"
+    "tiny-invariant": "^1.3.1",
+    "tslib": "^2.4.1"
   },
   "engines": {
     "node": ">=12.x"
@@ -42,7 +42,7 @@
     "src/"
   ],
   "devDependencies": {
-    "@saberhq/tsconfig": "^2.0.5",
+    "@saberhq/tsconfig": "^2.1.0",
     "@types/bn.js": "^5.1.1",
     "@types/lodash.mapvalues": "^4.6.7",
     "jsbi": "^4.3.0",
