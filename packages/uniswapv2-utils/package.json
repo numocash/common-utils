@@ -1,6 +1,6 @@
 {
-  "name": "@dahlia-labs/celo-tokens",
-  "description": "Common token list for Celo.",
+  "name": "@dahlia-labs/uniswapv2-utils",
+  "description": "Types and data collection functions for UniswapV2",
   "version": "0.8.1",
   "repository": {
     "type": "git",
@@ -8,6 +8,12 @@
   },
   "author": "Kyle Scott <kyle@dahlia.finance>",
   "license": "Apache-2.0",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
   "keywords": [
     "celo",
     "dahlia",
@@ -15,25 +21,24 @@
     "pinnata"
   ],
   "scripts": {
-    "build": "tsc && tsc -P tsconfig.cjs.json",
-    "clean": "rm -rf dist"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js"
-    }
+    "build": "npm run typechain && tsc && tsc -P tsconfig.cjs.json",
+    "clean": "rm -fr dist/",
+    "typechain": "typechain --target=ethers-v5 'src/**/abis/**/*.json' --out-dir src/generated/"
   },
   "dependencies": {
     "@dahlia-labs/celo-contrib": "workspace:^",
     "@dahlia-labs/token-utils": "workspace:^",
+    "@dahlia-labs/use-ethers": "workspace:^",
+    "@ethersproject/abi": "^5.7.0",
+    "@ethersproject/abstract-signer": "^5.7.0",
+    "@ethersproject/address": "^5.7.0",
+    "@ethersproject/constants": "^5.7.0",
+    "@ethersproject/contracts": "^5.7.0",
+    "@ethersproject/providers": "^5.7.2",
     "@ubeswap/token-math": "^5.2.1",
-    "lodash.mapvalues": "^4.6.0",
+    "lodash": "^4.17.21",
     "tiny-invariant": "^1.3.1",
     "tslib": "^2.4.1"
-  },
-  "engines": {
-    "node": ">=12.x"
   },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -42,10 +47,13 @@
     "src/"
   ],
   "devDependencies": {
+    "@ethersproject/bignumber": "^5.7.0",
     "@saberhq/tsconfig": "^2.1.0",
-    "@types/bn.js": "^5.1.1",
-    "@types/lodash.mapvalues": "^4.6.7",
+    "@typechain/ethers-v5": "^10.1.1",
+    "@types/lodash": "^4.14.190",
+    "ethers": "^5.7.2",
     "jsbi": "^4.3.0",
+    "typechain": "^8.1.1",
     "typescript": "^4.8.3"
   },
   "peerDependencies": {
