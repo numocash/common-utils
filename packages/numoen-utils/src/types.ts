@@ -1,12 +1,12 @@
 import type { Price, Token, TokenAmount } from "@dahlia-labs/token-utils";
-import type { UniswapV2Pair } from "@dahlia-labs/uniswapv2-utils";
+import type { IUniswapV2Pair } from "@dahlia-labs/uniswapv2-utils";
 
 export interface IMarket {
   token: Token;
 
   address: string;
   pair: IPair;
-  referenceMarket: UniswapV2Pair;
+  referenceMarket: IUniswapV2Pair;
 }
 
 export interface IMarketInfo {
