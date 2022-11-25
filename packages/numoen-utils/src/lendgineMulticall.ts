@@ -1,9 +1,16 @@
 import { TokenAmount } from "@dahlia-labs/token-utils";
 import type { Multicall, Multicall2 } from "@dahlia-labs/use-ethers";
 import { fetchMulticalls, totalSupplyMulticall } from "@dahlia-labs/use-ethers";
+import type { BigNumber } from "@ethersproject/bignumber";
 
-import { lendgineInterface } from "./contracts";
-import type { ILendgineImmutables, IMarket, IMarketInfo } from "./types";
+import { LIQUIDITYMANAGER } from "./constants";
+import { lendgineInterface, liquidityManagerInterface } from "./contracts";
+import type {
+  ILendgineImmutables,
+  IMarket,
+  IMarketInfo,
+  IMarketUserInfo,
+} from "./types";
 
 export const totalLiquidityMulticall = (
   market: IMarket
@@ -69,6 +76,42 @@ export const lastUpdateMulticall = (market: IMarket): Multicall<number> =>
         .decodeFunctionResult("lastUpdate", returnData)
         .toString(),
   } as const);
+
+export const getPositionMulticall = (
+  tokenID: number,
+  market: IMarket
+): Multicall<IMarketUserInfo> => ({
+  call: {
+    target: LIQUIDITYMANAGER,
+    callData: liquidityManagerInterface.encodeFunctionData("getPosition", [
+      tokenID,
+    ]),
+  },
+  parseReturn: (returnData: string) => {
+    const data = liquidityManagerInterface.decodeFunctionResult(
+      "getPosition",
+      returnData
+    ) as unknown as {
+      liquidity: BigNumber;
+      rewardPerLiquidityPaid: BigNumber;
+      tokensOwed: BigNumber;
+    };
+
+    return {
+      tokenID,
+      market,
+      liquidity: new TokenAmount(market.pair.lp, data.liquidity.toString()),
+      rewardPerLiquidityPaid: new TokenAmount(
+        market.pair.speculativeToken,
+        data.rewardPerLiquidityPaid.toString()
+      ),
+      tokensOwed: new TokenAmount(
+        market.pair.speculativeToken,
+        data.rewardPerLiquidityPaid.toString()
+      ),
+    };
+  },
+});
 
 export const factoryMulticall = (address: string): Multicall<string> =>
   ({
