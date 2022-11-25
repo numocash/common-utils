@@ -1,7 +1,7 @@
 {
   "name": "@dahlia-labs/celo-tokens",
   "description": "Common token list for Celo.",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/DahliaLabs/dahlia-common.git"
