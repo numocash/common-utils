@@ -1,0 +1,72 @@
+{
+  "name": "@dahlia-labs/numoen-utils",
+  "description": "Types and data collection functions for UniswapV2",
+  "version": "0.9.1",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/DahliaLabs/dahlia-common.git"
+  },
+  "author": "Kyle Scott <kyle@dahlia.finance>",
+  "license": "Apache-2.0",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "keywords": [
+    "celo",
+    "dahlia",
+    "mobius",
+    "pinnata"
+  ],
+  "scripts": {
+    "build": "npm run typechain && tsc && tsc -P tsconfig.cjs.json",
+    "clean": "rm -fr dist/",
+    "typechain": "typechain --target=ethers-v5 'src/**/abis/**/*.json' --out-dir src/generated/"
+  },
+  "dependencies": {
+    "@dahlia-labs/celo-contrib": "workspace:^",
+    "@dahlia-labs/token-utils": "workspace:^",
+    "@dahlia-labs/uniswapv2-utils": "workspace:^",
+    "@dahlia-labs/use-ethers": "workspace:^",
+    "@ethersproject/abi": "^5.7.0",
+    "@ethersproject/abstract-signer": "^5.7.0",
+    "@ethersproject/address": "^5.7.0",
+    "@ethersproject/constants": "^5.7.0",
+    "@ethersproject/contracts": "^5.7.0",
+    "@ethersproject/providers": "^5.7.2",
+    "@ubeswap/token-math": "^5.2.1",
+    "lodash": "^4.17.21",
+    "tiny-invariant": "^1.3.1",
+    "tslib": "^2.4.1"
+  },
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist/",
+    "src/"
+  ],
+  "devDependencies": {
+    "@ethersproject/bignumber": "^5.7.0",
+    "@saberhq/tsconfig": "^2.1.0",
+    "@typechain/ethers-v5": "^10.1.1",
+    "@types/lodash": "^4.14.190",
+    "ethers": "^5.7.2",
+    "jsbi": "^4.3.0",
+    "typechain": "^8.1.1",
+    "typescript": "^4.8.3"
+  },
+  "peerDependencies": {
+    "bn.js": "^4 || ^5",
+    "jsbi": "^3 || ^4"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "bugs": {
+    "url": "https://github.com/DahliaLabs/dahlia-common/issues"
+  },
+  "homepage": "https://github.com/DahliaLabs/dahlia-common#readme",
+  "gitHead": "f41418de24916ae96753da2fba3fff2d404c178e"
+}

@@ -14,6 +14,7 @@
     { "path": "packages/stableswap-sdk/" },
     { "path": "packages/token-utils/" },
     { "path": "packages/use-ethers/" },
-    { "path": "packages/uniswapv2-utils/" }
+    { "path": "packages/uniswapv2-utils/" },
+    { "path": "packages/numoen-utils/" }
   ]
 }

@@ -1561,6 +1561,38 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@dahlia-labs/numoen-utils@workspace:packages/numoen-utils":
+  version: 0.0.0-use.local
+  resolution: "@dahlia-labs/numoen-utils@workspace:packages/numoen-utils"
+  dependencies:
+    "@dahlia-labs/celo-contrib": "workspace:^"
+    "@dahlia-labs/token-utils": "workspace:^"
+    "@dahlia-labs/uniswapv2-utils": "workspace:^"
+    "@dahlia-labs/use-ethers": "workspace:^"
+    "@ethersproject/abi": ^5.7.0
+    "@ethersproject/abstract-signer": ^5.7.0
+    "@ethersproject/address": ^5.7.0
+    "@ethersproject/bignumber": ^5.7.0
+    "@ethersproject/constants": ^5.7.0
+    "@ethersproject/contracts": ^5.7.0
+    "@ethersproject/providers": ^5.7.2
+    "@saberhq/tsconfig": ^2.1.0
+    "@typechain/ethers-v5": ^10.1.1
+    "@types/lodash": ^4.14.190
+    "@ubeswap/token-math": ^5.2.1
+    ethers: ^5.7.2
+    jsbi: ^4.3.0
+    lodash: ^4.17.21
+    tiny-invariant: ^1.3.1
+    tslib: ^2.4.1
+    typechain: ^8.1.1
+    typescript: ^4.8.3
+  peerDependencies:
+    bn.js: ^4 || ^5
+    jsbi: ^3 || ^4
+  languageName: unknown
+  linkType: soft
+
 "@dahlia-labs/stableswap-sdk@workspace:packages/stableswap-sdk":
   version: 0.0.0-use.local
   resolution: "@dahlia-labs/stableswap-sdk@workspace:packages/stableswap-sdk"
@@ -1606,7 +1638,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@dahlia-labs/uniswapv2-utils@workspace:packages/uniswapv2-utils":
+"@dahlia-labs/uniswapv2-utils@workspace:^, @dahlia-labs/uniswapv2-utils@workspace:packages/uniswapv2-utils":
   version: 0.0.0-use.local
   resolution: "@dahlia-labs/uniswapv2-utils@workspace:packages/uniswapv2-utils"
   dependencies:
