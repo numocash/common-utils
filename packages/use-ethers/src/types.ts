@@ -13,3 +13,16 @@ export type Multicall<T> = Readonly<{
   call: Call;
   parseReturn: (returnData: string) => T;
 }>;
+
+export const chainID = {
+  mainnet: 1,
+  goerli: 5,
+  optimism: 10,
+  optimismGoerli: 420,
+  polygon: 137,
+  polygonMumbai: 80_001,
+  arbitrum: 42_161,
+  arbitrumGoerli: 421_613,
+  celo: 42_220,
+  celoAlfajores: 44_787,
+} as const;
