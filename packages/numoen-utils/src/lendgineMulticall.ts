@@ -6,6 +6,7 @@ import type { BigNumber } from "@ethersproject/bignumber";
 import { LIQUIDITYMANAGER } from "./constants";
 import { lendgineInterface, liquidityManagerInterface } from "./contracts";
 import type {
+  ChainsV1,
   ILendgineImmutables,
   IMarket,
   IMarketInfo,
@@ -79,10 +80,11 @@ export const lastUpdateMulticall = (market: IMarket): Multicall<number> =>
 
 export const getPositionMulticall = (
   tokenID: number,
-  market: IMarket
+  market: IMarket,
+  chainID: ChainsV1
 ): Multicall<IMarketUserInfo> => ({
   call: {
-    target: LIQUIDITYMANAGER,
+    target: LIQUIDITYMANAGER[chainID],
     callData: liquidityManagerInterface.encodeFunctionData("getPosition", [
       tokenID,
     ]),

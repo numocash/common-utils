@@ -19,7 +19,7 @@ import type {
   LiquidityManagerInterface,
 } from "./generated/LiquidityManager";
 import type { Pair, PairInterface } from "./generated/Pair";
-import type { IMarket, IPair } from "./types";
+import type { ChainsV1, IMarket, IPair } from "./types";
 
 export function getPairInterface(): PairInterface {
   return new Interface(PAIR_ABI.abi) as PairInterface;
@@ -62,23 +62,28 @@ export const getLendgineContract = (
 ): Lendgine =>
   getContract(market.address, LENDGINE_ABI.abi, provider) as Lendgine;
 
-export const getFactoryContract = (provider: ProviderOrSigner): Factory =>
-  getContract(FACTORY, FACTORY_ABI.abi, provider) as Factory;
+export const getFactoryContract = (
+  provider: ProviderOrSigner,
+  chainID: ChainsV1
+): Factory =>
+  getContract(FACTORY[chainID], FACTORY_ABI.abi, provider) as Factory;
 
 export const getLendgineRouterContract = (
-  provider: ProviderOrSigner
+  provider: ProviderOrSigner,
+  chainID: ChainsV1
 ): LendgineRouter =>
   getContract(
-    LENDGINEROUTER,
+    LENDGINEROUTER[chainID],
     LENDGINE_ROUTER_ABI.abi,
     provider
   ) as LendgineRouter;
 
 export const getLiquidityManagerContract = (
-  provider: ProviderOrSigner
+  provider: ProviderOrSigner,
+  chainID: ChainsV1
 ): LiquidityManager =>
   getContract(
-    LIQUIDITYMANAGER,
+    LIQUIDITYMANAGER[chainID],
     LIQUIDITY_MANAGER_ABI.abi,
     provider
   ) as LiquidityManager;

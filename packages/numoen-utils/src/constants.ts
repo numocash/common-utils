@@ -1,3 +1,13 @@
-export const FACTORY = "0x60ba0a7dcd2caa3eb171f0a8692a37d34900e247";
-export const LIQUIDITYMANAGER = "0x1fc287beadff8ac1d333566f1de19c36840ba96f";
-export const LENDGINEROUTER = "0xb004e43ba5a34d95dfbce8834b359b523cbf358c";
+import type { ChainsV1 } from "./types";
+
+type AddressMap = { [chain in ChainsV1]: string };
+
+export const FACTORY: AddressMap = {
+  goerli: "0x926DE2040e0f0DCC6524d3cFADf25A59A8f16Ee7",
+};
+export const LIQUIDITYMANAGER: AddressMap = {
+  goerli: "0x1b8dd4f91b5d8b814fbc03b75171be9792b4ab69",
+};
+export const LENDGINEROUTER: AddressMap = {
+  goerli: "0xd1a74569f97eceb08800b4349a9dfd02fbbfab2f",
+};
