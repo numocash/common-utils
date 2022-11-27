@@ -8,7 +8,7 @@ import type {
   BytesLike,
   CallOverrides,
   ContractTransaction,
-  Overrides,
+  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -123,28 +123,66 @@ export declare namespace LiquidityManager {
     recipient: string;
     deadline: BigNumber;
   };
+
+  export type SkimParamsStruct = {
+    base: PromiseOrValue<string>;
+    speculative: PromiseOrValue<string>;
+    baseScaleFactor: PromiseOrValue<BigNumberish>;
+    speculativeScaleFactor: PromiseOrValue<BigNumberish>;
+    upperBound: PromiseOrValue<BigNumberish>;
+    recipient: PromiseOrValue<string>;
+  };
+
+  export type SkimParamsStructOutput = [
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    string
+  ] & {
+    base: string;
+    speculative: string;
+    baseScaleFactor: BigNumber;
+    speculativeScaleFactor: BigNumber;
+    upperBound: BigNumber;
+    recipient: string;
+  };
 }
 
 export interface LiquidityManagerInterface extends utils.Interface {
   functions: {
+    "WETH9()": FunctionFragment;
     "collect((uint256,address,uint256))": FunctionFragment;
     "decreaseLiquidity((uint256,uint256,uint256,uint256,address,uint256))": FunctionFragment;
     "factory()": FunctionFragment;
     "getPosition(uint256)": FunctionFragment;
     "increaseLiquidity((uint256,uint256,uint256,uint256,uint256))": FunctionFragment;
     "mint((address,address,uint256,uint256,uint256,uint256,uint256,uint256,address,uint256))": FunctionFragment;
+    "multicall(bytes[])": FunctionFragment;
+    "refundETH()": FunctionFragment;
+    "skim((address,address,uint256,uint256,uint256,address))": FunctionFragment;
+    "sweepToken(address,uint256,address)": FunctionFragment;
+    "unwrapWETH9(uint256,address)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "WETH9"
       | "collect"
       | "decreaseLiquidity"
       | "factory"
       | "getPosition"
       | "increaseLiquidity"
       | "mint"
+      | "multicall"
+      | "refundETH"
+      | "skim"
+      | "sweepToken"
+      | "unwrapWETH9"
   ): FunctionFragment;
 
+  encodeFunctionData(functionFragment: "WETH9", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "collect",
     values: [LiquidityManager.CollectParamsStruct]
@@ -166,7 +204,29 @@ export interface LiquidityManagerInterface extends utils.Interface {
     functionFragment: "mint",
     values: [LiquidityManager.MintParamsStruct]
   ): string;
+  encodeFunctionData(
+    functionFragment: "multicall",
+    values: [PromiseOrValue<BytesLike>[]]
+  ): string;
+  encodeFunctionData(functionFragment: "refundETH", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "skim",
+    values: [LiquidityManager.SkimParamsStruct]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "sweepToken",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "unwrapWETH9",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
+  ): string;
 
+  decodeFunctionResult(functionFragment: "WETH9", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "collect", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "decreaseLiquidity",
@@ -182,6 +242,14 @@ export interface LiquidityManagerInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "multicall", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "refundETH", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "skim", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "sweepToken", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "unwrapWETH9",
+    data: BytesLike
+  ): Result;
 
   events: {
     "Collect(uint256,uint256)": EventFragment;
@@ -274,14 +342,16 @@ export interface LiquidityManager extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    WETH9(overrides?: CallOverrides): Promise<[string]>;
+
     collect(
       params: LiquidityManager.CollectParamsStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     decreaseLiquidity(
       params: LiquidityManager.DecreaseLiquidityParamsStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     factory(overrides?: CallOverrides): Promise<[string]>;
@@ -315,23 +385,52 @@ export interface LiquidityManager extends BaseContract {
 
     increaseLiquidity(
       params: LiquidityManager.IncreaseLiquidityParamsStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     mint(
       params: LiquidityManager.MintParamsStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    multicall(
+      data: PromiseOrValue<BytesLike>[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    refundETH(
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    skim(
+      params: LiquidityManager.SkimParamsStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    sweepToken(
+      token: PromiseOrValue<string>,
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    unwrapWETH9(
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
+  WETH9(overrides?: CallOverrides): Promise<string>;
+
   collect(
     params: LiquidityManager.CollectParamsStruct,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   decreaseLiquidity(
     params: LiquidityManager.DecreaseLiquidityParamsStruct,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   factory(overrides?: CallOverrides): Promise<string>;
@@ -365,15 +464,44 @@ export interface LiquidityManager extends BaseContract {
 
   increaseLiquidity(
     params: LiquidityManager.IncreaseLiquidityParamsStruct,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   mint(
     params: LiquidityManager.MintParamsStruct,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  multicall(
+    data: PromiseOrValue<BytesLike>[],
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  refundETH(
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  skim(
+    params: LiquidityManager.SkimParamsStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  sweepToken(
+    token: PromiseOrValue<string>,
+    amountMinimum: PromiseOrValue<BigNumberish>,
+    recipient: PromiseOrValue<string>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  unwrapWETH9(
+    amountMinimum: PromiseOrValue<BigNumberish>,
+    recipient: PromiseOrValue<string>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    WETH9(overrides?: CallOverrides): Promise<string>;
+
     collect(
       params: LiquidityManager.CollectParamsStruct,
       overrides?: CallOverrides
@@ -422,6 +550,31 @@ export interface LiquidityManager extends BaseContract {
       params: LiquidityManager.MintParamsStruct,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    multicall(
+      data: PromiseOrValue<BytesLike>[],
+      overrides?: CallOverrides
+    ): Promise<string[]>;
+
+    refundETH(overrides?: CallOverrides): Promise<void>;
+
+    skim(
+      params: LiquidityManager.SkimParamsStruct,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    sweepToken(
+      token: PromiseOrValue<string>,
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    unwrapWETH9(
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {
@@ -473,14 +626,16 @@ export interface LiquidityManager extends BaseContract {
   };
 
   estimateGas: {
+    WETH9(overrides?: CallOverrides): Promise<BigNumber>;
+
     collect(
       params: LiquidityManager.CollectParamsStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     decreaseLiquidity(
       params: LiquidityManager.DecreaseLiquidityParamsStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     factory(overrides?: CallOverrides): Promise<BigNumber>;
@@ -492,24 +647,53 @@ export interface LiquidityManager extends BaseContract {
 
     increaseLiquidity(
       params: LiquidityManager.IncreaseLiquidityParamsStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     mint(
       params: LiquidityManager.MintParamsStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    multicall(
+      data: PromiseOrValue<BytesLike>[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    refundETH(
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    skim(
+      params: LiquidityManager.SkimParamsStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    sweepToken(
+      token: PromiseOrValue<string>,
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    unwrapWETH9(
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
+    WETH9(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     collect(
       params: LiquidityManager.CollectParamsStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     decreaseLiquidity(
       params: LiquidityManager.DecreaseLiquidityParamsStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     factory(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -521,12 +705,39 @@ export interface LiquidityManager extends BaseContract {
 
     increaseLiquidity(
       params: LiquidityManager.IncreaseLiquidityParamsStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     mint(
       params: LiquidityManager.MintParamsStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    multicall(
+      data: PromiseOrValue<BytesLike>[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    refundETH(
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    skim(
+      params: LiquidityManager.SkimParamsStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    sweepToken(
+      token: PromiseOrValue<string>,
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    unwrapWETH9(
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

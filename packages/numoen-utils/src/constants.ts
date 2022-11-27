@@ -9,5 +9,5 @@ export const LIQUIDITYMANAGER: AddressMap = {
   goerli: "0x1b8dd4f91b5d8b814fbc03b75171be9792b4ab69",
 };
 export const LENDGINEROUTER: AddressMap = {
-  goerli: "0xd1a74569f97eceb08800b4349a9dfd02fbbfab2f",
+  goerli: "0x4e7234d2814872cf69e50d3107dc33bd4c347378",
 };

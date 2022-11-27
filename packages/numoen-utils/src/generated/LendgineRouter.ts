@@ -9,6 +9,7 @@ import type {
   CallOverrides,
   ContractTransaction,
   Overrides,
+  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -34,8 +35,8 @@ export declare namespace LendgineRouter {
     baseScaleFactor: PromiseOrValue<BigNumberish>;
     speculativeScaleFactor: PromiseOrValue<BigNumberish>;
     upperBound: PromiseOrValue<BigNumberish>;
-    shares: PromiseOrValue<BigNumberish>;
-    liquidityMax: PromiseOrValue<BigNumberish>;
+    sharesMax: PromiseOrValue<BigNumberish>;
+    liquidity: PromiseOrValue<BigNumberish>;
     recipient: PromiseOrValue<string>;
     deadline: PromiseOrValue<BigNumberish>;
   };
@@ -56,8 +57,8 @@ export declare namespace LendgineRouter {
     baseScaleFactor: BigNumber;
     speculativeScaleFactor: BigNumber;
     upperBound: BigNumber;
-    shares: BigNumber;
-    liquidityMax: BigNumber;
+    sharesMax: BigNumber;
+    liquidity: BigNumber;
     recipient: string;
     deadline: BigNumber;
   };
@@ -98,32 +99,70 @@ export declare namespace LendgineRouter {
     recipient: string;
     deadline: BigNumber;
   };
+
+  export type SkimParamsStruct = {
+    base: PromiseOrValue<string>;
+    speculative: PromiseOrValue<string>;
+    baseScaleFactor: PromiseOrValue<BigNumberish>;
+    speculativeScaleFactor: PromiseOrValue<BigNumberish>;
+    upperBound: PromiseOrValue<BigNumberish>;
+    recipient: PromiseOrValue<string>;
+  };
+
+  export type SkimParamsStructOutput = [
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    string
+  ] & {
+    base: string;
+    speculative: string;
+    baseScaleFactor: BigNumber;
+    speculativeScaleFactor: BigNumber;
+    upperBound: BigNumber;
+    recipient: string;
+  };
 }
 
 export interface LendgineRouterInterface extends utils.Interface {
   functions: {
     "MintCallback(uint256,bytes)": FunctionFragment;
+    "WETH9()": FunctionFragment;
     "burn((address,address,uint256,uint256,uint256,uint256,uint256,address,uint256))": FunctionFragment;
     "factory()": FunctionFragment;
     "mint((address,address,uint256,uint256,uint256,uint256,uint256,uint256,address,uint256))": FunctionFragment;
+    "multicall(bytes[])": FunctionFragment;
+    "refundETH()": FunctionFragment;
+    "skim((address,address,uint256,uint256,uint256,address))": FunctionFragment;
+    "sweepToken(address,uint256,address)": FunctionFragment;
     "uniFactory()": FunctionFragment;
     "uniswapV2Call(address,uint256,uint256,bytes)": FunctionFragment;
+    "unwrapWETH9(uint256,address)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
       | "MintCallback"
+      | "WETH9"
       | "burn"
       | "factory"
       | "mint"
+      | "multicall"
+      | "refundETH"
+      | "skim"
+      | "sweepToken"
       | "uniFactory"
       | "uniswapV2Call"
+      | "unwrapWETH9"
   ): FunctionFragment;
 
   encodeFunctionData(
     functionFragment: "MintCallback",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
   ): string;
+  encodeFunctionData(functionFragment: "WETH9", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "burn",
     values: [LendgineRouter.BurnParamsStruct]
@@ -132,6 +171,23 @@ export interface LendgineRouterInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "mint",
     values: [LendgineRouter.MintParamsStruct]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "multicall",
+    values: [PromiseOrValue<BytesLike>[]]
+  ): string;
+  encodeFunctionData(functionFragment: "refundETH", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "skim",
+    values: [LendgineRouter.SkimParamsStruct]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "sweepToken",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "uniFactory",
@@ -146,17 +202,30 @@ export interface LendgineRouterInterface extends utils.Interface {
       PromiseOrValue<BytesLike>
     ]
   ): string;
+  encodeFunctionData(
+    functionFragment: "unwrapWETH9",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
+  ): string;
 
   decodeFunctionResult(
     functionFragment: "MintCallback",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "WETH9", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "factory", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "multicall", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "refundETH", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "skim", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "sweepToken", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "uniFactory", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "uniswapV2Call",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "unwrapWETH9",
     data: BytesLike
   ): Result;
 
@@ -228,16 +297,39 @@ export interface LendgineRouter extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    WETH9(overrides?: CallOverrides): Promise<[string]>;
+
     burn(
       params: LendgineRouter.BurnParamsStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     factory(overrides?: CallOverrides): Promise<[string]>;
 
     mint(
       params: LendgineRouter.MintParamsStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    multicall(
+      data: PromiseOrValue<BytesLike>[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    refundETH(
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    skim(
+      params: LendgineRouter.SkimParamsStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    sweepToken(
+      token: PromiseOrValue<string>,
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     uniFactory(overrides?: CallOverrides): Promise<[string]>;
@@ -249,6 +341,12 @@ export interface LendgineRouter extends BaseContract {
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    unwrapWETH9(
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
   };
 
   MintCallback(
@@ -257,16 +355,39 @@ export interface LendgineRouter extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  WETH9(overrides?: CallOverrides): Promise<string>;
+
   burn(
     params: LendgineRouter.BurnParamsStruct,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   factory(overrides?: CallOverrides): Promise<string>;
 
   mint(
     params: LendgineRouter.MintParamsStruct,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  multicall(
+    data: PromiseOrValue<BytesLike>[],
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  refundETH(
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  skim(
+    params: LendgineRouter.SkimParamsStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  sweepToken(
+    token: PromiseOrValue<string>,
+    amountMinimum: PromiseOrValue<BigNumberish>,
+    recipient: PromiseOrValue<string>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   uniFactory(overrides?: CallOverrides): Promise<string>;
@@ -279,12 +400,20 @@ export interface LendgineRouter extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  unwrapWETH9(
+    amountMinimum: PromiseOrValue<BigNumberish>,
+    recipient: PromiseOrValue<string>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   callStatic: {
     MintCallback(
       amountS: PromiseOrValue<BigNumberish>,
       data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    WETH9(overrides?: CallOverrides): Promise<string>;
 
     burn(
       params: LendgineRouter.BurnParamsStruct,
@@ -298,6 +427,25 @@ export interface LendgineRouter extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string, BigNumber] & { lendgine: string; shares: BigNumber }>;
 
+    multicall(
+      data: PromiseOrValue<BytesLike>[],
+      overrides?: CallOverrides
+    ): Promise<string[]>;
+
+    refundETH(overrides?: CallOverrides): Promise<void>;
+
+    skim(
+      params: LendgineRouter.SkimParamsStruct,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    sweepToken(
+      token: PromiseOrValue<string>,
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     uniFactory(overrides?: CallOverrides): Promise<string>;
 
     uniswapV2Call(
@@ -305,6 +453,12 @@ export interface LendgineRouter extends BaseContract {
       amount0: PromiseOrValue<BigNumberish>,
       amount1: PromiseOrValue<BigNumberish>,
       data: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    unwrapWETH9(
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -344,16 +498,39 @@ export interface LendgineRouter extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    WETH9(overrides?: CallOverrides): Promise<BigNumber>;
+
     burn(
       params: LendgineRouter.BurnParamsStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     factory(overrides?: CallOverrides): Promise<BigNumber>;
 
     mint(
       params: LendgineRouter.MintParamsStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    multicall(
+      data: PromiseOrValue<BytesLike>[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    refundETH(
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    skim(
+      params: LendgineRouter.SkimParamsStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    sweepToken(
+      token: PromiseOrValue<string>,
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     uniFactory(overrides?: CallOverrides): Promise<BigNumber>;
@@ -365,6 +542,12 @@ export interface LendgineRouter extends BaseContract {
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    unwrapWETH9(
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -374,16 +557,39 @@ export interface LendgineRouter extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    WETH9(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     burn(
       params: LendgineRouter.BurnParamsStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     factory(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     mint(
       params: LendgineRouter.MintParamsStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    multicall(
+      data: PromiseOrValue<BytesLike>[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    refundETH(
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    skim(
+      params: LendgineRouter.SkimParamsStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    sweepToken(
+      token: PromiseOrValue<string>,
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     uniFactory(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -394,6 +600,12 @@ export interface LendgineRouter extends BaseContract {
       amount1: PromiseOrValue<BigNumberish>,
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    unwrapWETH9(
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }
