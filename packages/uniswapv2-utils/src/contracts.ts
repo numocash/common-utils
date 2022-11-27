@@ -34,14 +34,10 @@ export const reservesMulticall = (
       const data = pairInterface.decodeFunctionResult(
         "getReserves",
         returnData
-      ) as unknown as {
-        reserve0: BigNumber;
-        reserve1: BigNumber;
-      };
-
+      ) as [BigNumber, BigNumber];
       return [
-        new TokenAmount(pair.tokens[0], data.reserve0.toString()),
-        new TokenAmount(pair.tokens[1], data.reserve1.toString()),
+        new TokenAmount(pair.tokens[0], data[0].toString()),
+        new TokenAmount(pair.tokens[1], data[1].toString()),
       ] as const;
     },
   } as const);
