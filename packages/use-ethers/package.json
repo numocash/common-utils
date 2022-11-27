@@ -26,7 +26,6 @@
     "typechain": "typechain --target=ethers-v5 'src/**/abis/**/*.json' --out-dir src/generated/"
   },
   "dependencies": {
-    "@dahlia-labs/celo-contrib": "workspace:^",
     "@dahlia-labs/token-utils": "workspace:^",
     "@ethersproject/abi": "^5.7.0",
     "@ethersproject/abstract-signer": "^5.7.0",

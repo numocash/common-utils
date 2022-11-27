@@ -1565,7 +1565,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@dahlia-labs/numoen-utils@workspace:packages/numoen-utils"
   dependencies:
-    "@dahlia-labs/celo-contrib": "workspace:^"
     "@dahlia-labs/token-utils": "workspace:^"
     "@dahlia-labs/uniswapv2-utils": "workspace:^"
     "@dahlia-labs/use-ethers": "workspace:^"
@@ -1642,7 +1641,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@dahlia-labs/uniswapv2-utils@workspace:packages/uniswapv2-utils"
   dependencies:
-    "@dahlia-labs/celo-contrib": "workspace:^"
     "@dahlia-labs/token-utils": "workspace:^"
     "@dahlia-labs/use-ethers": "workspace:^"
     "@ethersproject/abi": ^5.7.0
@@ -1673,7 +1671,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@dahlia-labs/use-ethers@workspace:packages/use-ethers"
   dependencies:
-    "@dahlia-labs/celo-contrib": "workspace:^"
     "@dahlia-labs/token-utils": "workspace:^"
     "@ethersproject/abi": ^5.7.0
     "@ethersproject/abstract-signer": ^5.7.0
