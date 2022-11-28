@@ -49,7 +49,7 @@ export const factoryInterface = getFactoryInterface();
 
 export const liquidityManagerInterface = getLiquidityManagerInterface();
 
-export const lendgineRouterInterface = getLendgineInterface();
+export const lendgineRouterInterface = getLendgineRouterInterface();
 
 export const getPairContract = (
   pair: IPair,
