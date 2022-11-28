@@ -26,3 +26,5 @@ export const chainID = {
   celo: 42_220,
   celoAlfajores: 44_787,
 } as const;
+
+export type ChainType = keyof typeof chainID;

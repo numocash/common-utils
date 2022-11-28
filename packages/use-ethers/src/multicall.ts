@@ -4,11 +4,11 @@ import MULTICALL_ABI from "./abis/multicall2.json";
 import { MulticallAddress } from "./constants";
 import { getContract } from "./contracts";
 import type { Multicall2 } from "./generated";
-import type { Call, chainID, Multicall, ProviderOrSigner } from "./types";
+import type { Call, ChainType, Multicall, ProviderOrSigner } from "./types";
 
 export const getMulticall = (
   provider: ProviderOrSigner,
-  chain: keyof typeof chainID
+  chain: ChainType
 ): Multicall2 =>
   getContract(MulticallAddress[chain], MULTICALL_ABI, provider) as Multicall2;
 

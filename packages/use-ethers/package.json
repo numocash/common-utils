@@ -51,7 +51,7 @@
     "ethers": "^5.7.2",
     "jsbi": "^4.3.0",
     "typechain": "^8.1.1",
-    "typescript": "^4.8.3"
+    "typescript": "^4.9.3"
   },
   "peerDependencies": {
     "bn.js": "^4 || ^5",
