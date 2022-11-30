@@ -1,7 +1,7 @@
 {
   "name": "@dahlia-labs/numoen-utils",
   "description": "Types and data collection functions for UniswapV2",
-  "version": "0.9.12",
+  "version": "0.10.0",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/DahliaLabs/dahlia-common.git"
