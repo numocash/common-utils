@@ -109,7 +109,7 @@ export const getPositionMulticall = (
       ),
       tokensOwed: new TokenAmount(
         market.pair.speculativeToken,
-        data.rewardPerLiquidityPaid.toString()
+        data.tokensOwed.toString()
       ),
     };
   },
