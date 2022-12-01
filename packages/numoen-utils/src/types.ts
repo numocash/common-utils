@@ -2,7 +2,7 @@ import type { Price, Token, TokenAmount } from "@dahlia-labs/token-utils";
 import type { IUniswapV2Pair } from "@dahlia-labs/uniswapv2-utils";
 import type { chainID } from "@dahlia-labs/use-ethers";
 
-export type ChainsV1 = keyof Pick<typeof chainID, "goerli">;
+export type ChainsV1 = keyof Pick<typeof chainID, "goerli" | "arbitrum">;
 
 export interface IMarket {
   token: Token;
