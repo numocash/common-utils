@@ -7,7 +7,7 @@
     "dahlia",
     "pinnata"
   ],
-  "version": "0.10.2",
+  "version": "0.10.3",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/DahliaLabs/dahlia-common.git"
