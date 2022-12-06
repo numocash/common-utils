@@ -35,8 +35,9 @@ export declare namespace LendgineRouter {
     baseScaleFactor: PromiseOrValue<BigNumberish>;
     speculativeScaleFactor: PromiseOrValue<BigNumberish>;
     upperBound: PromiseOrValue<BigNumberish>;
-    sharesMax: PromiseOrValue<BigNumberish>;
-    liquidity: PromiseOrValue<BigNumberish>;
+    shares: PromiseOrValue<BigNumberish>;
+    amount0Min: PromiseOrValue<BigNumberish>;
+    amount1Min: PromiseOrValue<BigNumberish>;
     recipient: PromiseOrValue<string>;
     deadline: PromiseOrValue<BigNumberish>;
   };
@@ -44,6 +45,7 @@ export declare namespace LendgineRouter {
   export type BurnParamsStructOutput = [
     string,
     string,
+    BigNumber,
     BigNumber,
     BigNumber,
     BigNumber,
@@ -57,8 +59,9 @@ export declare namespace LendgineRouter {
     baseScaleFactor: BigNumber;
     speculativeScaleFactor: BigNumber;
     upperBound: BigNumber;
-    sharesMax: BigNumber;
-    liquidity: BigNumber;
+    shares: BigNumber;
+    amount0Min: BigNumber;
+    amount1Min: BigNumber;
     recipient: string;
     deadline: BigNumber;
   };
@@ -130,7 +133,7 @@ export interface LendgineRouterInterface extends utils.Interface {
   functions: {
     "MintCallback(uint256,bytes)": FunctionFragment;
     "WETH9()": FunctionFragment;
-    "burn((address,address,uint256,uint256,uint256,uint256,uint256,address,uint256))": FunctionFragment;
+    "burn((address,address,uint256,uint256,uint256,uint256,uint256,uint256,address,uint256))": FunctionFragment;
     "factory()": FunctionFragment;
     "mint((address,address,uint256,uint256,uint256,uint256,uint256,uint256,address,uint256))": FunctionFragment;
     "multicall(bytes[])": FunctionFragment;
