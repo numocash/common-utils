@@ -10,6 +10,7 @@ export interface IMarket {
   address: string;
   pair: IPair;
   referenceMarket: IUniswapV2Pair;
+  maxLiquidity: TokenAmount;
 }
 
 export interface IMarketInfo {
